@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Contact</title>
+  <meta name="description" content="Contact Md. Azmeer Hossin Talukder" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.30/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+</head>
+<body>
+  
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="courses.html">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <section class="section" style="padding-top:120px;">
+      <div class="container">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <p class="section-subtitle" style="text-align:center;margin-bottom:48px;">Have a question or want to work together? Let's connect!</p>
+        
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="info-item">
+              <i class="fas fa-envelope"></i>
+              <div><strong>Email</strong><p>azmeer.aht@gmail.com</p></div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-phone"></i>
+              <div><strong>Phone</strong><p>01686040637</p></div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div><strong>Address</strong><p>Block-E, Kalshi, Mirpur-12, Dhaka</p></div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <div><strong>Working Hours</strong><p>Sunday - Thursday: 9:00 AM - 5:00 PM</p></div>
+            </div>
+            
+            <div class="social-links">
+              <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+              <a href="https://wa.me/8801686040637" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send a Message</h3>
+            <form>
+              <input type="text" placeholder="Your Name" required />
+              <input type="email" placeholder="Your Email" required />
+              <input type="text" placeholder="Subject" />
+              <textarea placeholder="Your Message" rows="5" required></textarea>
+              <button class="btn primary" style="width:100%;">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p>ICT Educator & Web Enthusiast</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Courses</h4>
+          <a href="courses.html">Web Development</a>
+          <a href="courses.html">Python Programming</a>
+          <a href="courses.html">Data Science</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Subscribe for updates</p>
+          <input type="email" placeholder="Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-contact">
+    <a href="https://wa.me/8801686040637" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" class="messenger"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+</body>
+</html>

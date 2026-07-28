@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Gallery</title>
+  <meta name="description" content="Photo Gallery of Md. Azmeer Hossin Talukder" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <style>
+    /* ===== Gallery Page Specific Styles ===== */
+    
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    
+    .gallery-filters .filter-btn {
+      padding: 10px 28px;
+      border-radius: 40px;
+      border: 2px solid #e5e7eb;
+      background: transparent;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #1a1a2e;
+    }
+    
+    .gallery-filters .filter-btn:hover {
+      border-color: #FF8C42;
+      color: #FF8C42;
+      transform: translateY(-2px);
+    }
+    
+    .gallery-filters .filter-btn.active {
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
+    }
+    
+    /* ===== GRID: 5 COLUMNS DESKTOP ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      background: #1a1a2e;
+    }
+    
+    .gallery-item.hidden {
+      display: none !important;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(255, 140, 66, 0.15);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #1a1a2e;
+      transition: all 0.6s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.4s ease;
+      padding: 16px;
+    }
+    
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+    
+    .gallery-item .overlay span {
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    
+    .gallery-item:hover .overlay span {
+      transform: translateY(0);
+    }
+    
+    .gallery-item .overlay .category-icon {
+      font-size: 2rem;
+      margin-bottom: 4px;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    
+    .gallery-item:hover .overlay .category-icon {
+      transform: translateY(0);
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6B7280;
+      font-size: 1.1rem;
+      grid-column: 1 / -1;
+    }
+    
+    .no-results i {
+      font-size: 3rem;
+      color: #FF8C42;
+      display: block;
+      margin-bottom: 16px;
+    }
+    
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.92);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .lightbox .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 85vh;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+    
+    .lightbox .lightbox-content img {
+      width: 100%;
+      height: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+    
+    .lightbox .close-lightbox {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      z-index: 10;
+    }
+    
+    .lightbox .close-lightbox:hover {
+      transform: rotate(90deg);
+      color: #FF8C42;
+    }
+    
+    .lightbox .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #FF8C42;
+      color: #FF8C42;
+      transform: translateY(-50%) scale(1.05);
+    }
+    
+    .lightbox .nav-btn.prev {
+      left: -70px;
+    }
+    
+    .lightbox .nav-btn.next {
+      right: -70px;
+    }
+    
+    .lightbox .bottom-controls {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .lightbox .bottom-controls .control-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #ffffff;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .lightbox .bottom-controls .control-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FF8C42;
+    }
+    
+    .lightbox .bottom-controls .control-btn.liked {
+      color: #FF4D4D;
+    }
+    
+    .lightbox .bottom-controls .control-btn.liked i {
+      color: #FF4D4D;
+    }
+    
+    .lightbox .bottom-controls .like-count {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      margin-left: 4px;
+    }
+    
+    .lightbox .image-counter {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .lightbox .caption-text {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    
+    .show-more-wrapper {
+      text-align: center;
+      margin: 20px 0 40px;
+    }
+    
+    .show-more-wrapper .btn {
+      padding: 14px 48px;
+      font-size: 1rem;
+      border-radius: 60px;
+      border: 2px solid #FF8C42;
+      background: transparent;
+      color: #FF8C42;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .show-more-wrapper .btn:hover {
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.3);
+    }
+    
+    .show-more-wrapper .btn i {
+      transition: all 0.3s ease;
+    }
+    
+    .show-more-wrapper .btn:hover i {
+      transform: translateX(4px);
+    }
+    
+    /* ============================================
+       RESPONSIVE BREAKPOINTS
+       ============================================ */
+    
+    /* Desktop: 5 Columns */
+    @media (min-width: 992px) {
+      .gallery-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+    }
+    
+    /* Tablet: 3 Columns */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      
+      .gallery-item .overlay span {
+        font-size: 0.9rem;
+      }
+      
+      .gallery-item .overlay .category-icon {
+        font-size: 1.8rem;
+      }
+    }
+    
+    /* Mobile: 2 Columns */
+    @media (max-width: 767px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .gallery-filters .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+      
+      .gallery-item .overlay span {
+        font-size: 0.85rem;
+      }
+      
+      .gallery-item .overlay .category-icon {
+        font-size: 1.5rem;
+      }
+      
+      .lightbox {
+        padding: 10px;
+      }
+      
+      .lightbox .nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+      }
+      
+      .lightbox .nav-btn.prev {
+        left: 5px;
+      }
+      
+      .lightbox .nav-btn.next {
+        right: 5px;
+      }
+      
+      .lightbox .close-lightbox {
+        top: 10px;
+        right: 10px;
+        font-size: 1.6rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 6px 10px;
+      }
+      
+      .lightbox .bottom-controls {
+        bottom: -50px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      
+      .lightbox .bottom-controls .control-btn {
+        padding: 5px 12px;
+        font-size: 0.75rem;
+      }
+      
+      .lightbox .image-counter {
+        top: 10px;
+        left: 15px;
+        font-size: 0.75rem;
+      }
+      
+      .lightbox .caption-text {
+        bottom: -45px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    
+    /* Small Mobile: 2 Columns (same as mobile) */
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      
+      .show-more-wrapper .btn {
+        padding: 10px 28px;
+        font-size: 0.85rem;
+      }
+      
+      .lightbox .nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+      }
+      
+      .lightbox .bottom-controls .control-btn {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="courses.html">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <section class="section" style="padding-top:120px;">
+      <div class="container">
+        <h2 class="section-title">Photo <span>Gallery</span></h2>
+        
+        <div class="gallery-filters" id="galleryFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="travel">✈️ Travel</button>
+          <button class="filter-btn" data-filter="cricket">🏏 Cricket</button>
+          <button class="filter-btn" data-filter="nature">🌿 Nature</button>
+          <button class="filter-btn" data-filter="family">👨‍👩‍👧‍👧 Family</button>
+          <button class="filter-btn" data-filter="photography">📸 Photography</button>
+        </div>
+        
+        <div class="gallery-grid" id="galleryGrid">
+          
+          <!-- ===== TRAVEL (10 items) ===== -->
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/2.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏝️</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/95.jpeg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">⛰️</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/36.jpeg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌊</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/4.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌅</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/111.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌄</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/6.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏞️</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/57.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌺</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/12.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏖️</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/113.jpg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌋</span><span>Travel</span></div>
+          </div>
+          <div class="gallery-item" data-category="travel">
+            <img src="assets/images/102.jpeg" alt="Travel" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏔️</span><span>Travel</span></div>
+          </div>
+          
+          <!-- ===== PHOTOGRAPHY (10 items) ===== -->
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/76.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📸</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/65.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎥</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/64.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📷</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/75.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🖼️</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/63.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📹</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/62.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎞️</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/71.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📽️</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/81.jpg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📀</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/82.jpg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">💿</span><span>Photography</span></div>
+          </div>
+          <div class="gallery-item" data-category="photography">
+            <img src="assets/images/61.jpeg" alt="Photography" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📸</span><span>Photography</span></div>
+          </div>
+          
+          <!-- ===== FAMILY (10 items) ===== -->
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/41.jpeg" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">👨‍👩‍👧‍👧</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/42.jpeg" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏠</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/33.jpeg" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎉</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/29.jpeg" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">❤️</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/30.jpeg" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">👶</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="assets/images/44.jpeg" loading="lazy" />
+            <div class="overlay"><span class="category-icon">👵</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="https://via.placeholder.com/600x600/2ECC71/FFFFFF?text=Family+7" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🍽️</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="https://via.placeholder.com/600x600/3498DB/FFFFFF?text=Family+8" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎂</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="https://via.placeholder.com/600x600/9B59B6/FFFFFF?text=Family+9" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">📸</span><span>Family</span></div>
+          </div>
+          <div class="gallery-item" data-category="family">
+            <img src="https://via.placeholder.com/600x600/FF8C42/FFFFFF?text=Family+10" alt="Family" loading="lazy" />
+            <div class="overlay"><span class="category-icon">💕</span><span>Family</span></div>
+          </div>
+          
+          <!-- ===== CRICKET (10 items) ===== -->
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/19.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏏</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/16.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎯</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/23.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏆</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/17.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">⚾</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/18.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🥇</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/20.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏟️</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/21.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🎽</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/15.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏅</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/22.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🙌</span><span>Cricket</span></div>
+          </div>
+          <div class="gallery-item" data-category="cricket">
+            <img src="assets/images/32.jpeg" alt="Cricket" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🏏</span><span>Cricket</span></div>
+          </div>
+          
+          <!-- ===== NATURE (10 items) ===== -->
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/48.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌄</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/47.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌅</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/58.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌿</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/51.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌺</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/69.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌳</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/88.jpg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌊</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/24.jpg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🍂</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/25.jpg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">❄️</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/96.jpeg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌈</span><span>Nature</span></div>
+          </div>
+          <div class="gallery-item" data-category="nature">
+            <img src="assets/images/98.jpg" alt="Nature" loading="lazy" />
+            <div class="overlay"><span class="category-icon">🌻</span><span>Nature</span></div>
+          </div>
+          
+        </div>
+        
+        <div class="show-more-wrapper">
+          <button id="showMoreBtn" class="btn">
+            <i class="fas fa-chevron-down"></i> Show More Photos
+          </button>
+        </div>
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="close-lightbox" id="closeLightbox" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="nav-btn prev" id="prevBtn" aria-label="Previous">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="nav-btn next" id="nextBtn" aria-label="Next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <img id="lightboxImage" src="" alt="Gallery Image" />
+      <div class="image-counter" id="imageCounter">1 / 1</div>
+      <div class="caption-text" id="lightboxCaption">Image Title</div>
+      <div class="bottom-controls">
+        <button class="control-btn" id="likeBtn">
+          <i class="fas fa-heart"></i> Like <span class="like-count" id="likeCount">0</span>
+        </button>
+        <button class="control-btn" id="shareBtn">
+          <i class="fab fa-facebook"></i> Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p>ICT Educator &amp; Web Enthusiast</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Courses</h4>
+          <a href="courses.html">Web Development</a>
+          <a href="courses.html">Python Programming</a>
+          <a href="courses.html">Data Science</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Subscribe for updates</p>
+          <input type="email" placeholder="Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-contact">
+    <a href="https://wa.me/8801686040637" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" class="messenger"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+  <!-- Gallery Functionality Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // =========================================
+      // 1. LIGHTBOX WITH NAVIGATION
+      // =========================================
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const imageCounter = document.getElementById('imageCounter');
+      const closeLightbox = document.getElementById('closeLightbox');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const likeBtn = document.getElementById('likeBtn');
+      const likeCount = document.getElementById('likeCount');
+      const shareBtn = document.getElementById('shareBtn');
+      
+      let currentItems = [];
+      let currentIndex = 0;
+      let likes = {};
+      
+      document.querySelectorAll('.gallery-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+          const allVisible = document.querySelectorAll('.gallery-item:not(.hidden)');
+          
+          currentItems = [];
+          allVisible.forEach(function(el) {
+            currentItems.push(el);
+          });
+          
+          currentIndex = currentItems.indexOf(this);
+          if (currentIndex === -1) currentIndex = 0;
+          
+          openLightbox(currentIndex);
+        });
+      });
+      
+      function openLightbox(index) {
+        if (currentItems.length === 0) return;
+        
+        const item = currentItems[index];
+        const img = item.querySelector('img');
+        const overlaySpan = item.querySelector('.overlay span');
+        const categoryIcon = item.querySelector('.overlay .category-icon');
+        
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        
+        let caption = 'Gallery Image';
+        if (overlaySpan) {
+          caption = overlaySpan.textContent.trim();
+        }
+        if (categoryIcon) {
+          caption = categoryIcon.textContent.trim() + ' ' + caption;
+        }
+        lightboxCaption.textContent = caption;
+        
+        imageCounter.textContent = (index + 1) + ' / ' + currentItems.length;
+        
+        const imgSrc = img.src;
+        if (!likes[imgSrc]) {
+          likes[imgSrc] = 0;
+        }
+        likeCount.textContent = likes[imgSrc];
+        likeBtn.classList.remove('liked');
+        
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeLightboxFn() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      function navigate(direction) {
+        if (currentItems.length === 0) return;
+        currentIndex = (currentIndex + direction + currentItems.length) % currentItems.length;
+        openLightbox(currentIndex);
+      }
+      
+      closeLightbox.addEventListener('click', closeLightboxFn);
+      
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeLightboxFn();
+        }
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightboxFn();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+      });
+      
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigate(-1);
+      });
+      
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navigate(1);
+      });
+      
+      // =========================================
+      // 2. LIKE BUTTON
+      // =========================================
+      likeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const imgSrc = lightboxImage.src;
+        
+        if (!likes[imgSrc]) {
+          likes[imgSrc] = 0;
+        }
+        
+        if (this.classList.contains('liked')) {
+          likes[imgSrc]--;
+          this.classList.remove('liked');
+        } else {
+          likes[imgSrc]++;
+          this.classList.add('liked');
+        }
+        
+        likeCount.textContent = likes[imgSrc];
+        
+        try {
+          localStorage.setItem('galleryLikes', JSON.stringify(likes));
+        } catch(e) {}
+      });
+      
+      try {
+        const savedLikes = localStorage.getItem('galleryLikes');
+        if (savedLikes) {
+          likes = JSON.parse(savedLikes);
+        }
+      } catch(e) {}
+      
+      // =========================================
+      // 3. SHARE ON FACEBOOK
+      // =========================================
+      shareBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const currentUrl = window.location.href;
+        const caption = lightboxCaption.textContent;
+        
+        const shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + 
+          encodeURIComponent(currentUrl) + 
+          '&quote=' + encodeURIComponent('Check out this photo: ' + caption);
+        
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      });
+      
+      // =========================================
+      // 4. CATEGORY FILTER + SHUFFLE
+      // =========================================
+      const galleryGrid = document.getElementById('galleryGrid');
+      const showMoreBtn = document.getElementById('showMoreBtn');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      const allItems = Array.from(galleryGrid.querySelectorAll('.gallery-item'));
+      let visibleCount = 10;
+      let currentFilter = 'all';
+      let allVisibleItems = [];
+      
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+      
+      function filterItems(category) {
+        currentFilter = category;
+        let filteredItems = [];
+        
+        allItems.forEach(function(item) {
+          const itemCategory = item.getAttribute('data-category');
+          if (category === 'all' || itemCategory === category) {
+            item.classList.remove('hidden');
+            filteredItems.push(item);
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+        
+        if (category === 'all') {
+          filteredItems = shuffleArray(filteredItems);
+        }
+        
+        allVisibleItems = filteredItems;
+        return filteredItems;
+      }
+      
+      function updateVisibility() {
+        const totalVisible = allVisibleItems.length;
+        
+        allVisibleItems.forEach(function(item, index) {
+          if (index < visibleCount) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+        
+        if (totalVisible > 10) {
+          showMoreBtn.style.display = 'inline-block';
+          if (visibleCount >= totalVisible) {
+            showMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less Photos';
+          } else {
+            showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Photos (' + visibleCount + '/' + totalVisible + ')';
+          }
+        } else {
+          showMoreBtn.style.display = 'none';
+        }
+        
+        const existingNoResults = galleryGrid.querySelector('.no-results');
+        if (existingNoResults) {
+          existingNoResults.remove();
+        }
+        
+        if (totalVisible === 0) {
+          const noResults = document.createElement('div');
+          noResults.className = 'no-results';
+          noResults.innerHTML = '<i class="fas fa-search"></i> No photos found in this category';
+          galleryGrid.appendChild(noResults);
+        }
+      }
+      
+      showMoreBtn.addEventListener('click', function() {
+        const totalVisible = allVisibleItems.length;
+        if (visibleCount >= totalVisible) {
+          visibleCount = 10;
+        } else {
+          visibleCount = Math.min(visibleCount + 10, totalVisible);
+        }
+        updateVisibility();
+      });
+      
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) {
+            b.classList.remove('active');
+          });
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          filterItems(filter);
+          visibleCount = 10;
+          updateVisibility();
+        });
+      });
+      
+      filterItems('all');
+      visibleCount = 10;
+      updateVisibility();
+      
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Home</title>
+  <meta name="description" content="Md. Azmeer Hossin Talukder - Lecturer, ICT Educator, Web Enthusiast & Traveller" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.30/dist/lenis.min.js" defer></script>
+  
+  <style>
+    /* ===== SLIDER FIX - COVER (No empty space) ===== */
+    .image-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      background: var(--gradient-primary);
+    }
+
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 520px;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      color: #1a1a2e;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      z-index: 10;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .slider-btn:hover {
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .slider-btn.prev {
+      left: 20px;
+    }
+
+    .slider-btn.next {
+      right: 20px;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .slider-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider-dots .dot.active {
+      background: #ffffff;
+      transform: scale(1.2);
+    }
+
+    .slider-dots .dot:hover {
+      background: #ffffff;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-light);
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-greeting {
+      font-size: 1.2rem;
+      color: var(--orange-1);
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 12px 0 8px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: var(--font-secondary);
+    }
+
+    .hero-typed {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--gray);
+      min-height: 3rem;
+    }
+
+    .hero-typed::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: var(--orange-1);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-bio {
+      margin: 16px 0 8px;
+      font-weight: 300;
+      opacity: 0.8;
+      font-size: 1.05rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin: 20px 0 28px;
+    }
+
+    .hero-stats div {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .hero-stats .count {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--orange-1);
+      display: inline-block;
+      min-width: 40px;
+      font-family: var(--font-secondary);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 60px;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-primary);
+    }
+
+    .btn.primary {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.4);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 2px solid var(--orange-1);
+      color: var(--orange-1);
+    }
+
+    .btn.secondary:hover {
+      background: var(--orange-1);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .hero-socials a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      color: #1a1a2e;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-socials a:hover {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.2);
+    }
+
+    .profile-frame {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 4px solid #ffffff;
+      background: #ffffff;
+      margin: 0 auto;
+    }
+
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* ===== FLOATING SHAPES - DEEP ORANGE ===== */
+    .float-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Shape 1 - Top Right */
+    .shape1 {
+      width: 380px;
+      height: 380px;
+      background: #E85D04;
+      top: -80px;
+      right: -80px;
+      animation: floatShape1 20s ease-in-out infinite;
+    }
+
+    /* Shape 2 - Bottom Right */
+    .shape2 {
+      width: 280px;
+      height: 280px;
+      background: #DC2F02;
+      bottom: -60px;
+      right: -60px;
+      animation: floatShape2 20s ease-in-out infinite;
+    }
+
+    @keyframes floatShape1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 30px) scale(1.1); }
+    }
+
+    @keyframes floatShape2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-40px, -40px) scale(1.15); }
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 48px;
+      font-family: var(--font-secondary);
+      text-align: center;
+    }
+
+    .section-title span {
+      color: var(--orange-1);
+    }
+
+    /* ===== BLOG CARDS ===== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .blog-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(255, 140, 66, 0.12);
+      border-color: rgba(255, 140, 66, 0.15);
+    }
+
+    .blog-card h4 {
+      font-size: 1.2rem;
+      font-family: 'Sora', sans-serif;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+    }
+
+    .blog-card h4:hover {
+      color: #FF8C42;
+    }
+
+    .blog-card .blog-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: #6B7280;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .blog-card .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .blog-card .blog-meta i {
+      color: #FF8C42;
+      font-size: 0.9rem;
+    }
+
+    .blog-card .blog-meta .like-btn {
+      background: none;
+      border: none;
+      color: #6B7280;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .blog-card .blog-meta .like-btn:hover {
+      color: #FF4D4D;
+    }
+
+    .blog-card .blog-meta .like-btn.liked {
+      color: #FF4D4D;
+    }
+
+    .blog-card .blog-meta .like-btn.liked i {
+      color: #FF4D4D;
+    }
+
+    .blog-card .blog-meta .share-btn {
+      background: none;
+      border: none;
+      color: #6B7280;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .blog-card .blog-meta .share-btn:hover {
+      color: #1877F2;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      
+      .hero-image {
+        order: 0;
+      }
+      
+      .hero-content {
+        order: 1;
+      }
+      
+      .profile-frame {
+        width: 240px;
+        height: 240px;
+      }
+      
+      .hero-stats {
+        justify-content: center;
+      }
+      
+      .hero-actions {
+        justify-content: center;
+      }
+      
+      .hero-socials {
+        justify-content: center;
+      }
+
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .shape1 {
+        width: 250px;
+        height: 250px;
+        top: -50px;
+        right: -50px;
+      }
+
+      .shape2 {
+        width: 200px;
+        height: 200px;
+        bottom: -40px;
+        right: -40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slide {
+        height: 350px;
+      }
+      
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      
+      .slider-btn.prev {
+        left: 10px;
+      }
+      
+      .slider-btn.next {
+        right: 10px;
+      }
+      
+      .profile-frame {
+        width: 200px;
+        height: 200px;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .shape1 {
+        width: 180px;
+        height: 180px;
+        top: -30px;
+        right: -30px;
+      }
+
+      .shape2 {
+        width: 150px;
+        height: 150px;
+        bottom: -30px;
+        right: -30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .slide {
+        height: 260px;
+      }
+      
+      .slider-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+      }
+      
+      .profile-frame {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .hero-name {
+        font-size: 2rem;
+      }
+
+      .shape1 {
+        display: none;
+      }
+
+      .shape2 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Loading Screen -->
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <!-- Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+       <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="courses.html">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <span class="hero-greeting">Hello, I'm</span>
+          <h1 class="hero-name">Md. Azmeer Hossin Talukder</h1>
+          <div class="hero-typed"><span id="typed-text"></span></div>
+          <p class="hero-bio">Lecturer (ICT) · Civil Aviation School and College · Tejgaon, Dhaka</p>
+          <div class="hero-stats">
+            <div><span class="count" data-target="12">0</span>+ Courses</div>
+            <div><span class="count" data-target="8">0</span>+ Projects</div>
+            <div><span class="count" data-target="5">0</span>+ Awards</div>
+          </div>
+          <div class="hero-actions">
+            <a href="#" class="btn primary">Download CV <i class="fas fa-download"></i></a>
+            <a href="contact.html" class="btn secondary">Hire Me <i class="fas fa-paper-plane"></i></a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="profile-frame">
+            <img src="assets/images/profile.jpg" alt="Profile Photo" />
+          </div>
+        </div>
+      </div>
+      <!-- Floating Shapes -->
+      <div class="float-shape shape1"></div>
+      <div class="float-shape shape2"></div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section class="section" style="padding:60px 0; background: var(--gradient-light);">
+      <div class="container">
+        <h2 class="section-title">Featured <span>Gallery</span></h2>
+        <div class="image-slider">
+          <div class="slider-container">
+            <div class="slider-track">
+              <div class="slide">
+                <img src="assets/images/2.jpg" alt="Featured Image 1" />
+              </div>
+              <div class="slide">
+                <img src="assets/images/31.jpeg" alt="Featured Image 2" />
+              </div>
+              <div class="slide">
+                <img src="assets/images/120.jpeg" alt="Featured Image 3" />
+              </div>
+              <div class="slide">
+                <img src="assets/images/4.jpg" alt="Featured Image 4" />
+              </div>
+              <div class="slide">
+                <img src="assets/images/5.jpg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/109.jpg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/107.jpg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/87.jpg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/78.jpeg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/89.jpeg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/52.jpg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/26.jpeg" alt="Featured Image 5" />
+              </div>
+               <div class="slide">
+                <img src="assets/images/114.jpg" alt="Featured Image 5" />
+              </div>
+            </div>
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="slider-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="section" style="background: var(--gradient-light);">
+      <div class="container">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-briefcase" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Career</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">Lecturer at Civil Aviation School and College</p>
+          </div>
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-rocket" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Mission</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">Empower through ICT education</p>
+          </div>
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-eye" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Vision</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">Digital transformation in education</p>
+          </div>
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-chalkboard-teacher" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Teaching Philosophy</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">Practical, interactive, inclusive</p>
+          </div>
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-user-graduate" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Personal Story</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">From Sirajganj to Dhaka, passion for teaching</p>
+          </div>
+          <div class="about-card" style="background:#ffffff;padding:32px 24px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-route" style="font-size:2.4rem;color:#FF8C42;margin-bottom:12px;display:block;"></i>
+            <h4 style="font-size:1.2rem;margin-bottom:6px;font-family:'Sora',sans-serif;">Professional Journey</h4>
+            <p style="color:#6B7280;font-size:0.95rem;">ICT educator, web enthusiast, traveller</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:32px;">
+          <a href="about.html" class="btn primary">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Latest <span>Blog</span></h2>
+        <div class="blog-grid" id="blogGrid">
+          <!-- Blog cards will be populated by JavaScript -->
+        </div>
+        <div style="text-align:center;margin-top:32px;">
+          <a href="blog.html" class="btn secondary">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Preview -->
+    <section class="section" style="background: var(--gradient-light);">
+      <div class="container">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <div style="max-width:600px;margin:0 auto;">
+          <div style="background:#ffffff;padding:40px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <form style="display:flex;flex-direction:column;gap:16px;">
+              <input type="text" placeholder="Your Name" style="padding:14px 18px;border-radius:12px;border:1px solid #e5e7eb;font-size:1rem;background:#f9fafb;" />
+              <input type="email" placeholder="Your Email" style="padding:14px 18px;border-radius:12px;border:1px solid #e5e7eb;font-size:1rem;background:#f9fafb;" />
+              <textarea placeholder="Your Message" rows="4" style="padding:14px 18px;border-radius:12px;border:1px solid #e5e7eb;font-size:1rem;background:#f9fafb;font-family:inherit;"></textarea>
+              <button class="btn primary" style="width:100%;">Send <i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mega-footer" style="background:#1a1a2e;color:rgba(255,255,255,0.8);padding:60px 0 0;">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div>
+          <h4 style="font-size:1.2rem;margin-bottom:16px;color:#ffffff;font-family:'Sora',sans-serif;">Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p style="opacity:0.7;font-size:0.95rem;">ICT Educator &amp; Web Enthusiast</p>
+          <div style="display:flex;gap:12px;margin-top:16px;">
+            <a href="https://www.facebook.com/hossin3" target="_blank" style="color:rgba(255,255,255,0.7);font-size:1.4rem;transition:all 0.3s;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color:rgba(255,255,255,0.7);font-size:1.4rem;transition:all 0.3s;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color:rgba(255,255,255,0.7);font-size:1.4rem;transition:all 0.3s;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color:rgba(255,255,255,0.7);font-size:1.4rem;transition:all 0.3s;"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-size:1.1rem;margin-bottom:16px;color:#ffffff;font-family:'Sora',sans-serif;">Quick Links</h4>
+          <a href="index.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Home</a>
+          <a href="about.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">About</a>
+          <a href="resume.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Resume</a>
+          <a href="contact.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Contact</a>
+        </div>
+        <div>
+          <h4 style="font-size:1.1rem;margin-bottom:16px;color:#ffffff;font-family:'Sora',sans-serif;">Courses</h4>
+          <a href="courses.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Web Development</a>
+          <a href="courses.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Python Programming</a>
+          <a href="courses.html" style="display:block;margin:6px 0;opacity:0.7;transition:all 0.3s;">Data Science</a>
+        </div>
+        <div>
+          <h4 style="font-size:1.1rem;margin-bottom:16px;color:#ffffff;font-family:'Sora',sans-serif;">Newsletter</h4>
+          <p style="opacity:0.7;margin-bottom:12px;font-size:0.95rem;">Subscribe for updates</p>
+          <input type="email" placeholder="Your email" style="padding:10px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04);color:#ffffff;width:100%;margin-bottom:8px;font-size:0.95rem;" />
+          <button style="padding:10px 24px;border-radius:40px;border:none;background:linear-gradient(135deg,#FF8C42,#FF6B35);color:#ffffff;font-weight:600;cursor:pointer;transition:all 0.3s;width:100%;">Subscribe</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.04);padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <p style="opacity:0.6;font-size:0.9rem;">&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#ffffff;padding:12px 16px;border-radius:50%;cursor:pointer;transition:all 0.3s;"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Contact Buttons -->
+  <div style="position:fixed;bottom:30px;right:30px;display:flex;flex-direction:column;gap:12px;z-index:100;">
+    <a href="https://wa.me/8801686040637" target="_blank" style="background:#25D366;color:#ffffff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,0.3);transition:all 0.3s;">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" style="background:#0084FF;color:#ffffff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(0,132,255,0.3);transition:all 0.3s;">
+      <i class="fab fa-facebook-messenger"></i>
+    </a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+  <!-- Main Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // =========================================
+      // 1. SLIDER
+      // =========================================
+      const track = document.querySelector('.slider-track');
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.querySelector('.slider-btn.prev');
+      const nextBtn = document.querySelector('.slider-btn.next');
+      const dotsContainer = document.querySelector('.slider-dots');
+      
+      if (track && slides.length > 0) {
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('span');
+          dot.classList.add('dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', function() { goToSlide(i); });
+          dotsContainer.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.dot');
+        
+        function goToSlide(index) {
+          if (index < 0) index = totalSlides - 1;
+          if (index >= totalSlides) index = 0;
+          currentIndex = index;
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+          dots.forEach(function(dot, i) {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        }
+        
+        if (prevBtn) prevBtn.addEventListener('click', function() { goToSlide(currentIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function() { goToSlide(currentIndex + 1); });
+        
+        let autoSlide = setInterval(function() { goToSlide(currentIndex + 1); }, 4000);
+        
+        const sliderContainer = document.querySelector('.slider-container');
+        if (sliderContainer) {
+          sliderContainer.addEventListener('mouseenter', function() { clearInterval(autoSlide); });
+          sliderContainer.addEventListener('mouseleave', function() {
+            autoSlide = setInterval(function() { goToSlide(currentIndex + 1); }, 4000);
+          });
+        }
+      }
+      
+      // =========================================
+      // 2. ANIMATED COUNTERS
+      // =========================================
+      const counters = document.querySelectorAll('.count');
+      
+      function animateCounter(counter) {
+        const target = parseInt(counter.getAttribute('data-target'));
+        let current = 0;
+        const increment = Math.ceil(target / 60);
+        const timer = setInterval(function() {
+          current += increment;
+          if (current >= target) {
+            counter.textContent = target;
+            clearInterval(timer);
+          } else {
+            counter.textContent = current;
+          }
+        }, 30);
+      }
+      
+      const counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            if (!counter.classList.contains('counted')) {
+              counter.classList.add('counted');
+              animateCounter(counter);
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(function(counter) {
+        counterObserver.observe(counter);
+      });
+  
+      
+      // =========================================
+      // 4. BLOG SECTION
+      // =========================================
+      const blogGrid = document.getElementById('blogGrid');
+      
+      const blogData = [
+        {
+          id: 1,
+          title: 'Why ICT matters in modern education',
+          excerpt: 'Information and Communication Technology (ICT) plays a vital role in modern education by transforming the way knowledge is delivered...',
+          date: 'March 15, 2025',
+          readTime: '5 min read',
+          likes: 24,
+          views: 8,
+          category: 'Education',
+          link: 'blog.html#post1',
+          image: 'assets/images/ict.webp'
+        },
+        {
+          id: 2,
+          title: 'Digital transformation in classrooms',
+          excerpt: 'How schools are adopting digital tools to enhance learning experiences. From interactive whiteboards to AI-powered learning platforms...',
+          date: 'March 10, 2025',
+          readTime: '4 min read',
+          likes: 15,
+          views: 3,
+          category: 'Technology',
+          link: 'blog.html#post2',
+          image: 'assets/images/transformation.webp'
+        },
+        {
+          id: 3,
+          title: 'Teaching tips for online learning',
+          excerpt: 'Best practices for engaging students in virtual classrooms. Discover proven strategies to keep students motivated...',
+          date: 'March 5, 2025',
+          readTime: '6 min read',
+          likes: 18,
+          views: 5,
+          category: 'Teaching',
+          link: 'blog.html#post3',
+          image: 'assets/images/teachingtips.avif'
+        }
+      ];
+      
+      function loadBlogPosts() {
+        blogGrid.innerHTML = '';
+        
+        blogData.forEach(function(post) {
+          const card = document.createElement('div');
+          card.className = 'blog-card';
+          
+          let likeCount = post.likes;
+          const storageKey = 'blog_like_' + post.id;
+          if (localStorage.getItem(storageKey)) {
+            likeCount = parseInt(localStorage.getItem(storageKey));
+          }
+          
+          card.innerHTML = `
+            <div onclick="window.location.href='${post.link}'" style="cursor:pointer;">
+              <h4>${post.title}</h4>
+              <p style="color:#6B7280;font-size:0.9rem;">${post.excerpt}</p>
+            </div>
+            <div class="blog-meta">
+              <span><i class="fas fa-calendar-alt"></i> ${post.date}</span>
+              <span><i class="fas fa-clock"></i> ${post.readTime}</span>
+              <span><i class="fas fa-eye"></i> ${post.views}</span>
+              <span>
+                <button class="like-btn" data-id="${post.id}" data-likes="${likeCount}">
+                  <i class="fas fa-heart"></i> <span class="like-count">${likeCount}</span>
+                </button>
+              </span>
+              <span>
+                <button class="share-btn" data-title="${post.title}" data-link="${post.link}">
+                  <i class="fas fa-share-alt"></i> Share
+                </button>
+              </span>
+            </div>
+          `;
+          
+          blogGrid.appendChild(card);
+        });
+        
+        document.querySelectorAll('.like-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.getAttribute('data-id');
+            const countSpan = this.querySelector('.like-count');
+            let count = parseInt(countSpan.textContent);
+            const storageKey = 'blog_like_' + id;
+            
+            if (this.classList.contains('liked')) {
+              count--;
+              this.classList.remove('liked');
+            } else {
+              count++;
+              this.classList.add('liked');
+            }
+            
+            countSpan.textContent = count;
+            localStorage.setItem(storageKey, count);
+          });
+          
+          const id = btn.getAttribute('data-id');
+          const storageKey = 'blog_like_' + id;
+          if (localStorage.getItem(storageKey)) {
+            const savedCount = parseInt(localStorage.getItem(storageKey));
+            const countSpan = btn.querySelector('.like-count');
+            countSpan.textContent = savedCount;
+          }
+        });
+        
+        document.querySelectorAll('.share-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const title = this.getAttribute('data-title');
+            const link = this.getAttribute('data-link');
+            const url = window.location.origin + '/' + link;
+            
+            const shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + 
+              encodeURIComponent(url) + 
+              '&quote=' + encodeURIComponent('Check out this blog: ' + title);
+            
+            window.open(shareUrl, '_blank', 'width=600,height=500');
+          });
+        });
+      }
+      
+      loadBlogPosts();
+      
+    });
+  </script>
+</body>
+</html>

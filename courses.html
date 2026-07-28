@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Courses</title>
+  <meta name="description" content="HSC ICT Courses by Md. Azmeer Hossin Talukder" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <style>
+    /* ===== Courses Page Specific Styles ===== */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .course-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      height: 100%;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .course-card:nth-child(1) { animation-delay: 0.05s; }
+    .course-card:nth-child(2) { animation-delay: 0.10s; }
+    .course-card:nth-child(3) { animation-delay: 0.15s; }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(255, 140, 66, 0.15);
+      border-color: rgba(255, 140, 66, 0.2);
+    }
+    
+    .course-card .course-image {
+      height: 220px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+    }
+    
+    .course-card .course-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.6s ease;
+    }
+    
+    .course-card:hover .course-image img {
+      transform: scale(1.05);
+    }
+    
+    .course-card .course-image .course-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .course-card .course-body {
+      padding: 24px 24px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .course-card .course-body h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #1a1a2e;
+      line-height: 1.3;
+    }
+    
+    .course-card .course-body .course-description {
+      color: #6B7280;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    
+    /* Course Features */
+    .course-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 16px 0;
+      border-top: 1px solid #f3f4f6;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .course-features .feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #4B5563;
+    }
+    
+    .course-features .feature i {
+      color: #FF8C42;
+      font-size: 1rem;
+      width: 20px;
+    }
+    
+    /* Course Footer */
+    .course-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    
+    .course-footer .price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FF8C42;
+      font-family: 'Sora', sans-serif;
+    }
+    
+    .course-footer .price span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #6B7280;
+    }
+    
+    .course-footer .enroll-btn {
+      padding: 10px 24px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 140, 66, 0.25);
+    }
+    
+    .course-footer .enroll-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.35);
+    }
+    
+    .course-footer .enroll-btn i {
+      font-size: 0.9rem;
+    }
+    
+    /* ===== Bkash Payment Modal ===== */
+    .payment-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .payment-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .payment-modal .modal-box {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      padding: 40px 32px;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    }
+    
+    .payment-modal.active .modal-box {
+      transform: scale(1);
+    }
+    
+    .payment-modal .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #6B7280;
+      transition: all 0.3s ease;
+    }
+    
+    .payment-modal .close-modal:hover {
+      color: #1a1a2e;
+      transform: rotate(90deg);
+    }
+    
+    .payment-modal .modal-box h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .payment-modal .modal-box .subtitle {
+      text-align: center;
+      color: #6B7280;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    
+    .payment-modal .bkash-info {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .payment-modal .bkash-info .bkash-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #E2136E;
+      font-family: 'Sora', sans-serif;
+      letter-spacing: 1px;
+    }
+    
+    .payment-modal .bkash-info .bkash-label {
+      font-size: 0.85rem;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+    
+    .payment-modal .bkash-info .copy-btn {
+      background: none;
+      border: none;
+      color: #FF8C42;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 8px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .payment-modal .bkash-info .copy-btn:hover {
+      color: #E2136E;
+    }
+    
+    .payment-modal .modal-box .course-name {
+      font-weight: 600;
+      color: #1a1a2e;
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    
+    .payment-modal .modal-box .course-name span {
+      color: #FF8C42;
+    }
+    
+    .payment-modal .modal-box .amount {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FF8C42;
+      font-family: 'Sora', sans-serif;
+      margin-bottom: 20px;
+    }
+    
+    .payment-modal .modal-box .payment-note {
+      background: #fef3c7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: #92400e;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .payment-modal .modal-box .confirm-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(135deg, #E2136E, #C40E5E);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .payment-modal .modal-box .confirm-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(226, 19, 110, 0.3);
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .course-card .course-image {
+        height: 200px;
+      }
+      
+      .course-features {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      
+      .payment-modal .modal-box {
+        padding: 30px 20px;
+      }
+      
+      .payment-modal .bkash-info .bkash-number {
+        font-size: 1.4rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .course-card .course-image {
+        height: 180px;
+      }
+      
+      .course-card .course-body {
+        padding: 18px 18px 16px;
+      }
+      
+      .course-footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+      }
+      
+      .course-footer .enroll-btn {
+        justify-content: center;
+      }
+      
+      .course-features {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <section class="section" style="padding-top:120px;">
+      <div class="container">
+        <h2 class="section-title">HSC ICT <span>Courses</span></h2>
+        <p style="text-align:center;color:#6B7280;margin-bottom:48px;font-size:1.05rem;">
+          Prepare for your HSC ICT exam with comprehensive courses designed for excellence
+        </p>
+        
+        <!-- Courses Grid -->
+        <div class="courses-grid" id="coursesGrid">
+          
+          <!-- Course 1 -->
+          <div class="course-card" data-course="HSC ICT Batch 1">
+            <div class="course-image">
+              <img src="https://via.placeholder.com/600x400/FF8C42/FFFFFF?text=HSC+ICT+Course" alt="HSC ICT Batch 1" />
+              <span class="course-badge">🔥 Popular</span>
+            </div>
+            <div class="course-body">
+              <h3>HSC ICT Batch 1</h3>
+              <p class="course-description">Complete HSC ICT preparation with live classes, recorded sessions, and practice materials for the 2025 exam.</p>
+              
+              <div class="course-features">
+                <div class="feature"><i class="fas fa-clock"></i> 40 Classes</div>
+                <div class="feature"><i class="fas fa-pencil-alt"></i> 15 Tests</div>
+                <div class="feature"><i class="fas fa-video"></i> 20 Recorded</div>
+                <div class="feature"><i class="fas fa-users"></i> Live Sessions</div>
+              </div>
+              
+              <div class="course-footer">
+                <span class="price">৳2,499 <span>/ course</span></span>
+                <button class="enroll-btn" onclick="openPayment('HSC ICT Batch 1', '2499')">
+                  <i class="fas fa-rocket"></i> Enroll Now
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 2 -->
+          <div class="course-card" data-course="HSC ICT Batch 2">
+            <div class="course-image">
+              <img src="https://via.placeholder.com/600x400/FFB000/FFFFFF?text=HSC+ICT+Course" alt="HSC ICT Batch 2" />
+              <span class="course-badge">🌟 Best Value</span>
+            </div>
+            <div class="course-body">
+              <h3>HSC ICT Batch 2</h3>
+              <p class="course-description">Intensive HSC ICT preparation with focus on problem-solving, programming, and exam-oriented practice.</p>
+              
+              <div class="course-features">
+                <div class="feature"><i class="fas fa-clock"></i> 35 Classes</div>
+                <div class="feature"><i class="fas fa-pencil-alt"></i> 12 Tests</div>
+                <div class="feature"><i class="fas fa-video"></i> 18 Recorded</div>
+                <div class="feature"><i class="fas fa-users"></i> Live Sessions</div>
+              </div>
+              
+              <div class="course-footer">
+                <span class="price">৳2,199 <span>/ course</span></span>
+                <button class="enroll-btn" onclick="openPayment('HSC ICT Batch 2', '2199')">
+                  <i class="fas fa-rocket"></i> Enroll Now
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 3 -->
+          <div class="course-card" data-course="HSC ICT Crash Course">
+            <div class="course-image">
+              <img src="https://via.placeholder.com/600x400/FF6B35/FFFFFF?text=Crash+Course" alt="HSC ICT Crash Course" />
+              <span class="course-badge">⚡ Fast Track</span>
+            </div>
+            <div class="course-body">
+              <h3>HSC ICT Crash Course</h3>
+              <p class="course-description">Fast-track HSC ICT preparation for students who want to cover the entire syllabus in a short time effectively.</p>
+              
+              <div class="course-features">
+                <div class="feature"><i class="fas fa-clock"></i> 25 Classes</div>
+                <div class="feature"><i class="fas fa-pencil-alt"></i> 10 Tests</div>
+                <div class="feature"><i class="fas fa-video"></i> 15 Recorded</div>
+                <div class="feature"><i class="fas fa-users"></i> Live Sessions</div>
+              </div>
+              
+              <div class="course-footer">
+                <span class="price">৳1,799 <span>/ course</span></span>
+                <button class="enroll-btn" onclick="openPayment('HSC ICT Crash Course', '1799')">
+                  <i class="fas fa-rocket"></i> Enroll Now
+                </button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Additional Info -->
+        <div style="text-align:center;margin-top:40px;padding:24px;background:#f9fafb;border-radius:16px;">
+          <p style="color:#6B7280;font-size:0.95rem;">
+            <i class="fas fa-info-circle" style="color:#FF8C42;"></i> 
+            All courses include: Live classes, recorded sessions, practice tests, and study materials
+          </p>
+        </div>
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== BKASH PAYMENT MODAL ===== -->
+  <div class="payment-modal" id="paymentModal">
+    <div class="modal-box">
+      <button class="close-modal" onclick="closePayment()"><i class="fas fa-times"></i></button>
+      
+      <h3><i class="fas fa-mobile-alt" style="color:#E2136E;"></i> bkash Payment</h3>
+      <p class="subtitle">Send money to enroll in the course</p>
+      
+      <div class="course-name">Course: <span id="modalCourseName">HSC ICT Batch 1</span></div>
+      <div class="amount">৳<span id="modalAmount">2,499</span></div>
+      
+      <div class="bkash-info">
+        <div class="bkash-number">01686040637</div>
+        <div class="bkash-label">bkash Merchant Number</div>
+        <button class="copy-btn" onclick="copyNumber()">
+          <i class="fas fa-copy"></i> Copy Number
+        </button>
+      </div>
+      
+      <div class="payment-note">
+        <i class="fas fa-info-circle"></i> After sending money, please send the transaction ID to our WhatsApp for confirmation
+      </div>
+      
+      <a href="https://wa.me/8801686040637" target="_blank" class="confirm-btn">
+        <i class="fab fa-whatsapp"></i> Confirm Payment on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p>ICT Educator &amp; Web Enthusiast</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Courses</h4>
+          <a href="courses.html">HSC ICT Batch 1</a>
+          <a href="courses.html">HSC ICT Batch 2</a>
+          <a href="courses.html">HSC ICT Crash Course</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Subscribe for updates</p>
+          <input type="email" placeholder="Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-contact">
+    <a href="https://wa.me/8801686040637" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" class="messenger"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+  <!-- Courses Functionality Script -->
+  <script>
+    // =========================================
+    // PAYMENT MODAL
+    // =========================================
+    function openPayment(courseName, amount) {
+      document.getElementById('modalCourseName').textContent = courseName;
+      document.getElementById('modalAmount').textContent = parseInt(amount).toLocaleString();
+      document.getElementById('paymentModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closePayment() {
+      document.getElementById('paymentModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    // Close on background click
+    document.getElementById('paymentModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePayment();
+      }
+    });
+    
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closePayment();
+      }
+    });
+    
+    // =========================================
+    // COPY BKASH NUMBER
+    // =========================================
+    function copyNumber() {
+      const number = '01686040637';
+      navigator.clipboard.writeText(number).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.color = '#22c55e';
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.color = '#FF8C42';
+        }, 2000);
+      }).catch(() => {
+        // Fallback for older browsers
+        const input = document.createElement('input');
+        input.value = number;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        alert('Number copied: ' + number);
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Vlog</title>
+  <meta name="description" content="Vlog of Md. Azmeer Hossin Talukder" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <style>
+    /* ===== VLOG PAGE STYLES ===== */
+    .vlog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    
+    .vlog-filters .filter-btn {
+      padding: 10px 28px;
+      border-radius: 40px;
+      border: 2px solid #e5e7eb;
+      background: transparent;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #1a1a2e;
+    }
+    
+    .vlog-filters .filter-btn:hover {
+      border-color: #FF8C42;
+      color: #FF8C42;
+      transform: translateY(-2px);
+    }
+    
+    .vlog-filters .filter-btn.active {
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
+    }
+    
+    /* ===== VLOG GRID - 3 COLUMNS ===== */
+    .vlog-grid-full {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .vlog-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      height: 100%;
+      min-height: 380px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .vlog-card:nth-child(1) { animation-delay: 0.05s; }
+    .vlog-card:nth-child(2) { animation-delay: 0.10s; }
+    .vlog-card:nth-child(3) { animation-delay: 0.15s; }
+    .vlog-card:nth-child(4) { animation-delay: 0.20s; }
+    .vlog-card:nth-child(5) { animation-delay: 0.25s; }
+    .vlog-card:nth-child(6) { animation-delay: 0.30s; }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .vlog-card.hidden {
+      display: none !important;
+    }
+    
+    .vlog-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(255, 140, 66, 0.15);
+      border-color: rgba(255, 140, 66, 0.2);
+    }
+    
+    .vlog-card .vlog-thumbnail {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+      flex-shrink: 0;
+      background: #1a1a2e;
+      cursor: pointer;
+    }
+    
+    .vlog-card .vlog-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.6s ease;
+    }
+    
+    .vlog-card:hover .vlog-thumbnail img {
+      transform: scale(1.08);
+    }
+    
+    .vlog-card .vlog-thumbnail .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 140, 66, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.5rem;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+    
+    .vlog-card:hover .vlog-thumbnail .play-btn {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: rgba(255, 140, 66, 1);
+      box-shadow: 0 8px 40px rgba(255, 140, 66, 0.4);
+    }
+    
+    .vlog-card .vlog-thumbnail .duration-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
+    
+    .vlog-card .vlog-thumbnail .category-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+    }
+    
+    .vlog-card .vlog-content {
+      padding: 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .vlog-card .vlog-content h4 {
+      font-family: 'Sora', sans-serif;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      color: #1a1a2e;
+      transition: color 0.3s ease;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    
+    .vlog-card:hover .vlog-content h4 {
+      color: #FF8C42;
+    }
+    
+    .vlog-card .vlog-content p {
+      color: #6B7280;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+    
+    /* ===== VLOG META ===== */
+    .vlog-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.8rem;
+      color: #6B7280;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid #f3f4f6;
+      align-items: center;
+    }
+    
+    .vlog-meta .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .vlog-meta i {
+      color: #FF8C42;
+      font-size: 0.9rem;
+    }
+    
+    .vlog-meta .like-btn {
+      background: none;
+      border: none;
+      color: #6B7280;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .vlog-meta .like-btn:hover {
+      color: #FF4D4D;
+    }
+    
+    .vlog-meta .like-btn.liked {
+      color: #FF4D4D;
+    }
+    
+    .vlog-meta .like-btn.liked i {
+      color: #FF4D4D;
+    }
+    
+    .vlog-meta .share-btn {
+      background: none;
+      border: none;
+      color: #6B7280;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .vlog-meta .share-btn:hover {
+      color: #1877F2;
+    }
+    
+    /* ===== SHOW MORE / LESS BUTTON ===== */
+    .show-more-wrapper {
+      text-align: center;
+      margin: 20px 0 40px;
+    }
+    
+    .show-more-wrapper .btn {
+      padding: 14px 48px;
+      font-size: 1rem;
+      border-radius: 60px;
+      border: 2px solid #FF8C42;
+      background: transparent;
+      color: #FF8C42;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .show-more-wrapper .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 140, 66, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .show-more-wrapper .btn:hover::before {
+      left: 100%;
+    }
+    
+    .show-more-wrapper .btn:hover {
+      background: linear-gradient(135deg, #FF8C42, #FF6B35);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.3);
+    }
+    
+    .show-more-wrapper .btn i {
+      transition: all 0.3s ease;
+    }
+    
+    .show-more-wrapper .btn:hover i {
+      transform: translateX(4px);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6B7280;
+      font-size: 1.1rem;
+      grid-column: 1 / -1;
+    }
+    
+    .no-results i {
+      font-size: 3rem;
+      color: #FF8C42;
+      display: block;
+      margin-bottom: 16px;
+    }
+    
+    /* ===== FLOATING SHAPES ===== */
+    .vlog-shapes {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .vlog-shape-1 {
+      width: 300px;
+      height: 300px;
+      background: #FF8C42;
+      top: -100px;
+      right: -100px;
+      animation: floatVlog1 25s ease-in-out infinite;
+    }
+    
+    .vlog-shape-2 {
+      width: 200px;
+      height: 200px;
+      background: #FF6B35;
+      bottom: -60px;
+      left: -60px;
+      animation: floatVlog2 20s ease-in-out infinite;
+    }
+    
+    @keyframes floatVlog1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-40px, 40px) scale(1.2); }
+    }
+    
+    @keyframes floatVlog2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -40px) scale(1.3); }
+    }
+    
+    .section {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .vlog-grid-full {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .vlog-grid-full {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .vlog-card .vlog-thumbnail {
+        height: 200px;
+      }
+      
+      .vlog-filters .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+      }
+      
+      .vlog-shape-1,
+      .vlog-shape-2 {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .vlog-card .vlog-thumbnail {
+        height: 180px;
+      }
+      
+      .vlog-card .vlog-content {
+        padding: 16px 18px;
+      }
+      
+      .vlog-card .vlog-thumbnail .play-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .vlog-meta {
+        gap: 10px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html" class="active">Vlog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="courses.html">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <section class="section" style="padding-top:120px;">
+      <div class="vlog-shapes vlog-shape-1"></div>
+      <div class="vlog-shapes vlog-shape-2"></div>
+      
+      <div class="container">
+        <h2 class="section-title">Featured <span>Vlogs</span></h2>
+        
+        <!-- Category Filters -->
+        <div class="vlog-filters" id="vlogFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="teaching">📚 Teaching</button>
+          <button class="filter-btn" data-filter="technology">💻 Technology</button>
+          <button class="filter-btn" data-filter="tips">🎯 Tips</button>
+          <button class="filter-btn" data-filter="classroom">🏫 Classroom</button>
+        </div>
+        
+        <!-- Vlog Grid - 12 Cards (3x2 = 6 per category) -->
+        <div class="vlog-grid-full" id="vlogGrid">
+          
+          <!-- ===== TEACHING (6 items = 3x2) ===== -->
+          <div class="vlog-card" data-category="teaching" data-video="vrU6YJle6Q4" data-title="Teaching tips for beginners">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Teaching tips for beginners" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">12:30</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=vrU6YJle6Q4', '_blank')">Teaching tips for beginners</h4>
+              <p>Essential strategies for new teachers to engage students effectively.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 1.2K</span>
+                <span class="meta-item"><button class="like-btn" data-id="1" data-likes="45"><i class="fas fa-heart"></i> <span class="like-count">45</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Teaching tips for beginners" data-video="vrU6YJle6Q4"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="teaching" data-video="kJQP7kiw5Fk" data-title="First day of teaching">
+            <div class="vlog-thumbnail">
+              <img src="" alt="First day of teaching" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">7:50</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=kJQP7kiw5Fk', '_blank')">First day of teaching</h4>
+              <p>Practical advice for your first day as a teacher.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 2.3K</span>
+                <span class="meta-item"><button class="like-btn" data-id="5" data-likes="89"><i class="fas fa-heart"></i> <span class="like-count">89</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="First day of teaching" data-video="kJQP7kiw5Fk"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="teaching" data-video="dQw4w9WgXcQ" data-title="Classroom technology tips">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Classroom technology tips" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">9:45</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">Classroom technology tips</h4>
+              <p>How to effectively integrate technology into your daily teaching routine.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 450</span>
+                <span class="meta-item"><button class="like-btn" data-id="9" data-likes="18"><i class="fas fa-heart"></i> <span class="like-count">18</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Classroom technology tips" data-video="dQw4w9WgXcQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Teaching Row 2 -->
+          <div class="vlog-card" data-category="teaching" data-video="muql7erdmZE" data-title="Teaching with technology">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Teaching with technology" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">8:30</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=muql7erdmZE', '_blank')">Teaching with technology</h4>
+              <p>Best practices for using technology in the classroom effectively.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 560</span>
+                <span class="meta-item"><button class="like-btn" data-id="13" data-likes="27"><i class="fas fa-heart"></i> <span class="like-count">27</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Teaching with technology" data-video="muql7erdmZE"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="teaching" data-video="0tZFQs7qBfQ" data-title="AI for teachers">
+            <div class="vlog-thumbnail">
+              <img src="" alt="AI for teachers" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">6:50</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=0tZFQs7qBfQ', '_blank')">AI for teachers</h4>
+              <p>How teachers can leverage AI to enhance their teaching methods.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 380</span>
+                <span class="meta-item"><button class="like-btn" data-id="14" data-likes="15"><i class="fas fa-heart"></i> <span class="like-count">15</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="AI for teachers" data-video="0tZFQs7qBfQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="teaching" data-video="7X2c2pV0pKg" data-title="Student motivation tips">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Student motivation tips" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">5:40</span>
+              <span class="category-badge">Teaching</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=7X2c2pV0pKg', '_blank')">Student motivation tips</h4>
+              <p>Proven strategies to keep students motivated and engaged.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 420</span>
+                <span class="meta-item"><button class="like-btn" data-id="15" data-likes="19"><i class="fas fa-heart"></i> <span class="like-count">19</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Student motivation tips" data-video="7X2c2pV0pKg"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== TECHNOLOGY (6 items = 3x2) ===== -->
+          <div class="vlog-card" data-category="technology" data-video="LBb94wHUnA0" data-title="ICT tools for teachers">
+            <div class="vlog-thumbnail">
+              <img src="" alt="ICT tools for teachers" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">10:15</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=LBb94wHUnA0', '_blank')">ICT tools for teachers</h4>
+              <p>Best digital tools to enhance teaching and learning.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 1.5K</span>
+                <span class="meta-item"><button class="like-btn" data-id="3" data-likes="58"><i class="fas fa-heart"></i> <span class="like-count">58</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="ICT tools for teachers" data-video="LBb94wHUnA0"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="technology" data-video="0tZFQs7qBfQ" data-title="AI in education">
+            <div class="vlog-thumbnail">
+              <img src="" alt="AI in education" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">11:30</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=0tZFQs7qBfQ', '_blank')">AI in education</h4>
+              <p>How artificial intelligence is transforming education.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 980</span>
+                <span class="meta-item"><button class="like-btn" data-id="6" data-likes="41"><i class="fas fa-heart"></i> <span class="like-count">41</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="AI in education" data-video="0tZFQs7qBfQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="technology" data-video="9bZkp7q19f0" data-title="Digital learning platforms">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Digital learning platforms" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">7:30</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=9bZkp7q19f0', '_blank')">Digital learning platforms</h4>
+              <p>Explore the best digital learning platforms for online courses.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 630</span>
+                <span class="meta-item"><button class="like-btn" data-id="10" data-likes="26"><i class="fas fa-heart"></i> <span class="like-count">26</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Digital learning platforms" data-video="9bZkp7q19f0"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technology Row 2 -->
+          <div class="vlog-card" data-category="technology" data-video="tgbNymZ7vqY" data-title="EdTech trends">
+            <div class="vlog-thumbnail">
+              <img src="" alt="EdTech trends" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">8:20</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=tgbNymZ7vqY', '_blank')">EdTech trends</h4>
+              <p>Latest trends in educational technology for 2025.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 720</span>
+                <span class="meta-item"><button class="like-btn" data-id="16" data-likes="33"><i class="fas fa-heart"></i> <span class="like-count">33</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="EdTech trends" data-video="tgbNymZ7vqY"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="technology" data-video="LBb94wHUnA0" data-title="Classroom tech tools">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Classroom tech tools" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">6:15</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=LBb94wHUnA0', '_blank')">Classroom tech tools</h4>
+              <p>Essential tech tools every modern classroom needs.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 510</span>
+                <span class="meta-item"><button class="like-btn" data-id="17" data-likes="24"><i class="fas fa-heart"></i> <span class="like-count">24</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Classroom tech tools" data-video="LBb94wHUnA0"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="technology" data-video="0tZFQs7qBfQ" data-title="Future of EdTech">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Future of EdTech" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">7:45</span>
+              <span class="category-badge">Technology</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=0tZFQs7qBfQ', '_blank')">Future of EdTech</h4>
+              <p>What the future holds for educational technology.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 490</span>
+                <span class="meta-item"><button class="like-btn" data-id="18" data-likes="21"><i class="fas fa-heart"></i> <span class="like-count">21</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Future of EdTech" data-video="0tZFQs7qBfQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== TIPS (6 items = 3x2) ===== -->
+          <div class="vlog-card" data-category="tips" data-video="fJ9rUzIMcZQ" data-title="Student engagement techniques">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Student engagement techniques" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">9:20</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=fJ9rUzIMcZQ', '_blank')">Student engagement techniques</h4>
+              <p>Creative ways to keep students interested and participative.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 670</span>
+                <span class="meta-item"><button class="like-btn" data-id="4" data-likes="28"><i class="fas fa-heart"></i> <span class="like-count">28</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Student engagement techniques" data-video="fJ9rUzIMcZQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="tips" data-video="Q0R5FMrqHvQ" data-title="Study tips for students">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Study tips for students" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">8:15</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=Q0R5FMrqHvQ', '_blank')">Study tips for students</h4>
+              <p>Proven study techniques to help students learn faster.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 720</span>
+                <span class="meta-item"><button class="like-btn" data-id="8" data-likes="35"><i class="fas fa-heart"></i> <span class="like-count">35</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Study tips for students" data-video="Q0R5FMrqHvQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="tips" data-video="fJ9rUzIMcZQ" data-title="Effective lesson planning">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Effective lesson planning" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">10:20</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=fJ9rUzIMcZQ', '_blank')">Effective lesson planning</h4>
+              <p>Step-by-step guide to creating effective lesson plans.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 540</span>
+                <span class="meta-item"><button class="like-btn" data-id="11" data-likes="22"><i class="fas fa-heart"></i> <span class="like-count">22</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Effective lesson planning" data-video="fJ9rUzIMcZQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips Row 2 -->
+          <div class="vlog-card" data-category="tips" data-video="kJQP7kiw5Fk" data-title="Time management for teachers">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Time management for teachers" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">6:30</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=kJQP7kiw5Fk', '_blank')">Time management for teachers</h4>
+              <p>Effective time management strategies for busy teachers.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 430</span>
+                <span class="meta-item"><button class="like-btn" data-id="19" data-likes="20"><i class="fas fa-heart"></i> <span class="like-count">20</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Time management for teachers" data-video="kJQP7kiw5Fk"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="tips" data-video="dQw4w9WgXcQ" data-title="Self-care for educators">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Self-care for educators" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">7:10</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">Self-care for educators</h4>
+              <p>Why self-care matters and how to practice it as an educator.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 390</span>
+                <span class="meta-item"><button class="like-btn" data-id="20" data-likes="17"><i class="fas fa-heart"></i> <span class="like-count">17</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Self-care for educators" data-video="dQw4w9WgXcQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="tips" data-video="muql7erdmZE" data-title="Parent-teacher communication">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Parent-teacher communication" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">5:50</span>
+              <span class="category-badge">Tips</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=muql7erdmZE', '_blank')">Parent-teacher communication</h4>
+              <p>Best practices for effective parent-teacher communication.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 360</span>
+                <span class="meta-item"><button class="like-btn" data-id="21" data-likes="14"><i class="fas fa-heart"></i> <span class="like-count">14</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Parent-teacher communication" data-video="muql7erdmZE"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== CLASSROOM (6 items = 3x2) ===== -->
+          <div class="vlog-card" data-category="classroom" data-video="muql7erdmZE" data-title="Classroom management strategies">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Classroom management strategies" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">8:45</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=muql7erdmZE', '_blank')">Classroom management strategies</h4>
+              <p>Effective techniques for maintaining discipline and engagement.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 890</span>
+                <span class="meta-item"><button class="like-btn" data-id="2" data-likes="32"><i class="fas fa-heart"></i> <span class="like-count">32</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Classroom management strategies" data-video="muql7erdmZE"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="classroom" data-video="7X2c2pV0pKg" data-title="Interactive classroom activities">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Interactive classroom activities" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">6:40</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=7X2c2pV0pKg', '_blank')">Interactive classroom activities</h4>
+              <p>Fun and engaging activities to make your classroom more interactive.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 540</span>
+                <span class="meta-item"><button class="like-btn" data-id="7" data-likes="22"><i class="fas fa-heart"></i> <span class="like-count">22</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Interactive classroom activities" data-video="7X2c2pV0pKg"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="classroom" data-video="tgbNymZ7vqY" data-title="Positive classroom environment">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Positive classroom environment" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">11:00</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=tgbNymZ7vqY', '_blank')">Positive classroom environment</h4>
+              <p>Tips for creating a positive and inclusive classroom environment.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 760</span>
+                <span class="meta-item"><button class="like-btn" data-id="12" data-likes="31"><i class="fas fa-heart"></i> <span class="like-count">31</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Positive classroom environment" data-video="tgbNymZ7vqY"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Classroom Row 2 -->
+          <div class="vlog-card" data-category="classroom" data-video="LBb94wHUnA0" data-title="Classroom technology setup">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Classroom technology setup" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">9:30</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=LBb94wHUnA0', '_blank')">Classroom technology setup</h4>
+              <p>How to set up technology in your classroom for maximum impact.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 480</span>
+                <span class="meta-item"><button class="like-btn" data-id="22" data-likes="20"><i class="fas fa-heart"></i> <span class="like-count">20</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Classroom technology setup" data-video="LBb94wHUnA0"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="classroom" data-video="0tZFQs7qBfQ" data-title="Inclusive classroom strategies">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Inclusive classroom strategies" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">7:20</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=0tZFQs7qBfQ', '_blank')">Inclusive classroom strategies</h4>
+              <p>Strategies for creating an inclusive classroom for all students.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 410</span>
+                <span class="meta-item"><button class="like-btn" data-id="23" data-likes="18"><i class="fas fa-heart"></i> <span class="like-count">18</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Inclusive classroom strategies" data-video="0tZFQs7qBfQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vlog-card" data-category="classroom" data-video="dQw4w9WgXcQ" data-title="Classroom routines and procedures">
+            <div class="vlog-thumbnail">
+              <img src="" alt="Classroom routines and procedures" loading="lazy" />
+              <div class="play-btn"><i class="fas fa-play"></i></div>
+              <span class="duration-badge">8:10</span>
+              <span class="category-badge">Classroom</span>
+            </div>
+            <div class="vlog-content">
+              <h4 onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">Classroom routines and procedures</h4>
+              <p>Effective routines and procedures for a smooth-running classroom.</p>
+              <div class="vlog-meta">
+                <span class="meta-item"><i class="fas fa-eye"></i> 370</span>
+                <span class="meta-item"><button class="like-btn" data-id="24" data-likes="16"><i class="fas fa-heart"></i> <span class="like-count">16</span></button></span>
+                <span class="meta-item"><button class="share-btn" data-title="Classroom routines and procedures" data-video="dQw4w9WgXcQ"><i class="fab fa-facebook"></i> Share</button></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Show More / Show Less Button (Only for All Category) -->
+        <div class="show-more-wrapper">
+          <button id="showMoreBtn" class="btn">
+            <i class="fas fa-chevron-down"></i> Show More Videos
+          </button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p>ICT Educator &amp; Web Enthusiast</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Courses</h4>
+          <a href="courses.html">Web Development</a>
+          <a href="courses.html">Python Programming</a>
+          <a href="courses.html">Data Science</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Subscribe for updates</p>
+          <input type="email" placeholder="Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-contact">
+    <a href="https://wa.me/8801686040637" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" class="messenger"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // =========================================
+      // 1. AUTO GENERATE THUMBNAILS
+      // =========================================
+      document.querySelectorAll('.vlog-card').forEach(function(card) {
+        var videoId = card.getAttribute('data-video');
+        if (videoId) {
+          var img = card.querySelector('.vlog-thumbnail img');
+          if (img) {
+            var thumbnailUrls = [
+              'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg',
+              'https://img.youtube.com/vi/' + videoId + '/sddefault.jpg',
+              'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg',
+              'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg'
+            ];
+            
+            img.src = thumbnailUrls[0];
+            img.onerror = function() {
+              var currentSrc = this.src;
+              var currentIndex = thumbnailUrls.indexOf(currentSrc);
+              if (currentIndex < thumbnailUrls.length - 1) {
+                this.src = thumbnailUrls[currentIndex + 1];
+              } else {
+                this.style.display = 'none';
+                var placeholder = document.createElement('div');
+                placeholder.className = 'thumbnail-placeholder';
+                placeholder.innerHTML = '<i class="fas fa-video"></i>';
+                this.parentNode.appendChild(placeholder);
+              }
+            };
+          }
+        }
+      });
+      
+      // =========================================
+      // 2. PLAY BUTTON - OPEN ON YOUTUBE
+      // =========================================
+      document.querySelectorAll('.play-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var card = this.closest('.vlog-card');
+          var videoId = card.getAttribute('data-video');
+          if (videoId) {
+            window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
+          }
+        });
+      });
+      
+      // =========================================
+      // 3. LIKE FUNCTIONALITY
+      // =========================================
+      document.querySelectorAll('.like-btn').forEach(function(btn) {
+        var id = btn.getAttribute('data-id');
+        var storageKey = 'vlog_like_' + id;
+        var savedLikes = localStorage.getItem(storageKey);
+        if (savedLikes !== null) {
+          var countSpan = btn.querySelector('.like-count');
+          countSpan.textContent = savedLikes;
+        }
+        
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var id = this.getAttribute('data-id');
+          var countSpan = this.querySelector('.like-count');
+          var count = parseInt(countSpan.textContent);
+          var storageKey = 'vlog_like_' + id;
+          
+          if (this.classList.contains('liked')) {
+            count--;
+            this.classList.remove('liked');
+          } else {
+            count++;
+            this.classList.add('liked');
+          }
+          
+          countSpan.textContent = count;
+          localStorage.setItem(storageKey, count);
+        });
+      });
+      
+      // =========================================
+      // 4. SHARE ON FACEBOOK
+      // =========================================
+      document.querySelectorAll('.share-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var title = this.getAttribute('data-title');
+          var videoId = this.getAttribute('data-video');
+          
+          var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + 
+            encodeURIComponent('https://www.youtube.com/watch?v=' + videoId) + 
+            '&quote=' + encodeURIComponent('🎬 Check out this vlog: ' + title);
+          
+          window.open(shareUrl, '_blank', 'width=600,height=500');
+        });
+      });
+      
+      // =========================================
+      // 5. CATEGORY FILTER & SHOW MORE
+      // =========================================
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var allCards = document.querySelectorAll('.vlog-card');
+      var showMoreBtn = document.getElementById('showMoreBtn');
+      var vlogGrid = document.getElementById('vlogGrid');
+      
+      // All cards count: Teaching(6) + Technology(6) + Tips(6) + Classroom(6) = 24
+      var visibleCount = 6; // Show 6 initially
+      var allVisibleCards = [];
+      
+      function filterVideos(category) {
+        var filteredCards = [];
+        allCards.forEach(function(card) {
+          var cardCategory = card.getAttribute('data-category');
+          if (category === 'all' || cardCategory === category) {
+            card.classList.remove('hidden');
+            filteredCards.push(card);
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        allVisibleCards = filteredCards;
+        
+        // Reset visible count for category
+        if (category === 'all') {
+          visibleCount = 6;
+        } else {
+          visibleCount = 6; // All categories show exactly 6
+        }
+        updateVisibility();
+        return filteredCards;
+      }
+      
+      function updateVisibility() {
+        var totalVisible = allVisibleCards.length;
+        allVisibleCards.forEach(function(card, index) {
+          if (index < visibleCount) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        
+        // Show More button only for All category (when total > 6)
+        if (currentFilter === 'all' && totalVisible > 6) {
+          showMoreBtn.style.display = 'inline-block';
+          if (visibleCount >= totalVisible) {
+            showMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less Videos';
+          } else {
+            showMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More Videos (' + visibleCount + '/' + totalVisible + ')';
+          }
+        } else {
+          showMoreBtn.style.display = 'none';
+        }
+        
+        var existingNoResults = vlogGrid.querySelector('.no-results');
+        if (existingNoResults) existingNoResults.remove();
+        if (totalVisible === 0) {
+          var noResults = document.createElement('div');
+          noResults.className = 'no-results';
+          noResults.innerHTML = '<i class="fas fa-search"></i> No videos found in this category';
+          vlogGrid.appendChild(noResults);
+        }
+      }
+      
+      var currentFilter = 'all';
+      
+      showMoreBtn.addEventListener('click', function() {
+        var totalVisible = allVisibleCards.length;
+        if (visibleCount >= totalVisible) {
+          visibleCount = 6;
+        } else {
+          visibleCount = Math.min(visibleCount + 6, totalVisible);
+        }
+        updateVisibility();
+      });
+      
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          currentFilter = this.getAttribute('data-filter');
+          filterVideos(currentFilter);
+          // For non-all categories, ensure exactly 6 items are shown (if available)
+          if (currentFilter !== 'all') {
+            visibleCount = 6;
+          }
+        });
+      });
+      
+      // Initial load - All category
+      currentFilter = 'all';
+      filterVideos('all');
+      visibleCount = 6;
+      updateVisibility();
+      
+    });
+  </script>
+
+</body>
+</html>

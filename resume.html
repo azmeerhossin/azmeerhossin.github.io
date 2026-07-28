@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azmeer · Resume</title>
+  <meta name="description" content="Resume of Md. Azmeer Hossin Talukder" />
+  <meta name="theme-color" content="#FFF5EB" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <!-- html2pdf Library for PDF Download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/animation.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.30/dist/lenis.min.js" defer></script>
+  
+  <style>
+    /* ===== Resume Page Specific Styles ===== */
+    .resume-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      margin-bottom: 40px;
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      align-items: center;
+    }
+    
+    .resume-header-left h2 {
+      font-family: var(--font-secondary);
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+    
+    .resume-header-left .title {
+      color: var(--orange-1);
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    
+    .resume-header-left p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .resume-header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+      min-width: 200px;
+    }
+    
+    .resume-header-right .info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .resume-header-right .info-item i {
+      color: var(--orange-1);
+      width: 18px;
+      font-size: 1rem;
+    }
+    
+    .resume-header-right .info-item strong {
+      font-weight: 600;
+    }
+    
+    /* Profile Photo */
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--orange-1);
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
+    
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .resume-header-top {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+    
+    /* Research Section */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+    
+    .research-item {
+      background: var(--white);
+      padding: 20px 24px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--orange-1);
+      transition: var(--transition);
+    }
+    
+    .research-item:hover {
+      transform: translateX(6px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .research-item h4 {
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: var(--orange-1);
+    }
+    
+    .research-item p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    /* Extra Curricular */
+    .extracurricular-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    
+    .extracurricular-item {
+      background: var(--white);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .extracurricular-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .extracurricular-item .icon-img {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 8px;
+      display: block;
+    }
+    
+    .extracurricular-item .icon-img svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .extracurricular-item i {
+      font-size: 2rem;
+      color: var(--orange-1);
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .extracurricular-item h4 {
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    
+    .extracurricular-item p {
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    
+    /* Leadership */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+    
+    .leadership-item {
+      background: var(--white);
+      padding: 20px 24px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border-bottom: 3px solid var(--orange-1);
+      transition: var(--transition);
+    }
+    
+    .leadership-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .leadership-item h4 {
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      color: var(--orange-1);
+    }
+    
+    .leadership-item p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    .leadership-item .org {
+      font-weight: 500;
+      color: var(--black);
+    }
+    
+    /* Section Headers */
+    .section-sub-heading {
+      font-family: var(--font-secondary);
+      font-size: 1.3rem;
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--black);
+    }
+    
+    .section-sub-heading i {
+      color: var(--orange-1);
+    }
+    
+    .section-divider {
+      border: none;
+      border-top: 2px solid var(--light-gray);
+      margin: 32px 0;
+    }
+    
+    /* Download CV Button - Bottom Center */
+    .download-cv-wrapper {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+    
+    .download-cv-wrapper .btn {
+      padding: 16px 48px;
+      font-size: 1.1rem;
+    }
+    
+    /* PDF Loading Spinner */
+    .pdf-loading {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .pdf-loading.active {
+      display: block;
+    }
+    
+    .pdf-loading .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--light-gray);
+      border-top: 4px solid var(--orange-1);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 12px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .resume-header {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+      
+      .resume-header-top {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .resume-header-right {
+        align-items: center;
+        width: 100%;
+      }
+      
+      .profile-photo {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .extracurricular-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .leadership-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .extracurricular-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .download-cv-wrapper .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Azmeer<span>.</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html" class="active">Resume</a>
+        <a href="blog.html">Blog</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="courses.html">Courses</a>
+        <a href="aitools.html">AI Tools</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="scroll-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <main>
+    <section class="section" style="padding-top:120px;">
+      <div class="container">
+        <h2 class="section-title">My <span>Resume</span></h2>
+        
+        <!-- ===== Resume Content (PDF Download Target) ===== -->
+        <div id="resume-content">
+          <!-- Resume Header with Photo -->
+          <div class="resume-header">
+            <div class="resume-header-top">
+              <div class="profile-photo">
+                <img src="assets/images/profile.jpg" alt="Md. Azmeer Hossin Talukder" />
+              </div>
+              <div class="resume-header-left">
+                <h2>Md. Azmeer Hossin Talukder</h2>
+                <p class="title">Lecturer (ICT) · Civil Aviation School and College</p>
+                <p>Passionate ICT educator with 8+ years of experience in teaching, curriculum development, and educational technology. Dedicated to empowering students through innovative digital learning approaches.</p>
+              </div>
+            </div>
+            <div class="resume-header-right">
+              <div class="info-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> azmeer.aht@gmail.com</div>
+              <div class="info-item"><i class="fas fa-phone"></i> <strong>Phone:</strong> 01686040637</div>
+              <div class="info-item"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Dhaka, Bangladesh</div>
+              <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Experience:</strong> 8+ Years</div>
+            </div>
+          </div>
+
+          <!-- Professional Experience & Education -->
+          <div class="resume-grid">
+            <div class="resume-section">
+              <h3><i class="fas fa-briefcase"></i> Professional Experience</h3>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <h4>2023 – Present</h4>
+                  <p><strong>Lecturer (ICT)</strong> · Civil Aviation School and College, Tejgaon</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
+                </div>
+                <div class="timeline-item">
+                  <h4>2019 – 2023</h4>
+                  <p><strong>Assistant Teacher (ICT)</strong> · South Point School &amp; College, Baridhara</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
+                </div>
+                <div class="timeline-item">
+                  <h4>2017 – 2019</h4>
+                  <p><strong>Frontend Developer</strong> · Mistri Solutions</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Panthapath, Dhaka</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="resume-section">
+              <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <h4>2018 – 2019</h4>
+                  <p><strong>M.Sc. in Computer Science</strong> · Jahangirnagar University</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Savar, Dhaka</span>
+                </div>
+                <div class="timeline-item">
+                  <h4>2014 – 2018</h4>
+                  <p><strong>B.Sc. in Computer Science &amp; Engineering</strong> · University of Asia Pacific</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
+                </div>
+                <div class="timeline-item">
+                  <h4>2010 – 2012</h4>
+                  <p><strong>Higher Secondary Certificate (HSC)</strong> · Sirajganj Government College</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Sirajganj, Bangladesh</span>
+                </div>
+                <div class="timeline-item">
+                  <h4>2009</h4>
+                  <p><strong>Secondary School Certificate (SSC)</strong> · Sabuj Kanan School &amp; College</p>
+                  <span class="location"><i class="fas fa-map-marker-alt"></i> Sirajganj, Bangladesh</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Research Interest -->
+          <h3 class="section-sub-heading"><i class="fas fa-flask"></i> Research Interest</h3>
+          <div class="research-grid">
+            <div class="research-item">
+              <h4>Machine Learning</h4>
+              <p>Bearing Fault Diagnosis Using Convolutional Neural Networks (CNNs)" under supervision of Dr. Md. Rashedul Islam, Associate Professor, University of Asia Pacific.</p>
+            </div>
+            <div class="research-item">
+              <h4>Image Processing</h4>
+              <p>Brain Tumor Image Segmentation using Region Growing Method" under supervision of Md. Abul Kalam Azad, Professor, Jahangirnagar University.</p>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Extra Curricular Activities -->
+          <h3 class="section-sub-heading"><i class="fas fa-futbol"></i> Extra Curricular Activities</h3>
+          <div class="extracurricular-grid">
+            <div class="extracurricular-item">
+              <span class="icon-img">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L9 8l-6 1 4 5-1 6 6-3 6 3-1-6 4-5-6-1-3-6z"/>
+                  <path d="M9 8l6 1-2 5 2 5-3-2-3 2 2-5-2-5z"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </span>
+              <h4>Cricket</h4>
+              <p>Batsman &amp; Keeper</p>
+            </div>
+            <div class="extracurricular-item">
+              <i class="fas fa-futbol"></i>
+              <h4>Football</h4>
+              <p>Attacking Midfielder</p>
+            </div>
+            <div class="extracurricular-item">
+              <i class="fas fa-book-open"></i>
+              <h4>Reading</h4>
+              <p>Self-Development Books</p>
+            </div>
+            <div class="extracurricular-item">
+              <i class="fas fa-fish"></i>
+              <h4>Fishing</h4>
+              <p>Passionate Angler</p>
+            </div>
+            <div class="extracurricular-item">
+              <i class="fas fa-globe-asia"></i>
+              <h4>Travelling</h4>
+              <p>Mountains &amp; Sea</p>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Leadership -->
+          <h3 class="section-sub-heading"><i class="fas fa-users-cog"></i> Leadership</h3>
+          <div class="leadership-grid">
+            <div class="leadership-item">
+              <h4>Club President</h4>
+              <p class="org">UAP CSE Sports Club</p>
+              <p>Leading the Sports curriculum development and training initiatives.</p>
+            </div>
+            <div class="leadership-item">
+              <h4>Mentor</h4>
+              <p class="org">CASC ICT Club</p>
+              <p>Organized workshops, seminars, and programming events.</p>
+            </div>
+            <div class="leadership-item">
+              <h4>Team Leader</h4>
+              <p class="org">ACM ICPC, Dhaka Regional-2018</p>
+              <p>Organized workshops, seminars, and volunteer works.</p>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Skills -->
+          <div class="skills-section">
+            <h3><i class="fas fa-code"></i> Skills</h3>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <span>HTML, CSS &amp; JavaScript</span>
+                <div class="skill-bar"><div style="width:90%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span>WordPress</span>
+                <div class="skill-bar"><div style="width:85%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span>Mobile App Development</span>
+                <div class="skill-bar"><div style="width:55%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span>AI Models</span>
+                <div class="skill-bar"><div style="width:60%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span>Networking</span>
+                <div class="skill-bar"><div style="width:65%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span>Video Editing</span>
+                <div class="skill-bar"><div style="width:70%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ===== End Resume Content ===== -->
+
+        <!-- ===== Download CV Button with Loading Spinner ===== -->
+        <div class="download-cv-wrapper">
+          <button onclick="downloadPDF()" class="btn primary" id="downloadBtn">
+            <i class="fas fa-file-pdf"></i> Download Full CV
+          </button>
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="spinner"></div>
+            <p>Generating PDF...</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Azmeer<span style="color:#FF8C42;">.</span></h4>
+          <p>ICT Educator &amp; Web Enthusiast</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Courses</h4>
+          <a href="courses.html">Web Development</a>
+          <a href="courses.html">Python Programming</a>
+          <a href="courses.html">Data Science</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Subscribe for updates</p>
+          <input type="email" placeholder="Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Azmeer · All rights reserved</p>
+        <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-contact">
+    <a href="https://wa.me/8801686040637" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/hossin3" target="_blank" class="messenger"><i class="fab fa-facebook-messenger"></i></a>
+  </div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/animation.js" defer></script>
+
+  <!-- PDF Download Script -->
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('resume-content');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const loadingSpinner = document.getElementById('pdfLoading');
+      
+      // Show loading spinner
+      loadingSpinner.classList.add('active');
+      downloadBtn.disabled = true;
+      
+      const opt = {
+        margin:        [0.5, 0.5, 0.5, 0.5],
+        filename:     'Azmeer_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, letterRendering: true, useCORS: true, logging: false },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      
+      html2pdf().set(opt).from(element).save()
+        .then(function() {
+          loadingSpinner.classList.remove('active');
+          downloadBtn.disabled = false;
+        })
+        .catch(function(error) {
+          console.error('PDF Generation Error:', error);
+          loadingSpinner.classList.remove('active');
+          downloadBtn.disabled = false;
+          alert('❌ Failed to generate PDF. Please try again or right-click and select "Print" > "Save as PDF".');
+        });
+    }
+  </script>
+  
+</body>
+</html>
