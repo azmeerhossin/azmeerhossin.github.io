@@ -108,7 +108,7 @@
 
     .slider-dots .dot:hover { background: #ffffff; }
 
-    /* ===== HERO SECTION - MOBILE FIX ===== */
+    /* ===== HERO SECTION ===== */
     .hero-section {
       min-height: 100vh;
       display: flex;
@@ -204,42 +204,48 @@
       flex-wrap: wrap;
     }
 
+    /* ===== FORCE BUTTONS TO BE VISIBLE ===== */
     .btn {
-      padding: 14px 32px;
-      border-radius: 60px;
-      border: none;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-family: var(--font-primary);
+      padding: 14px 32px !important;
+      border-radius: 60px !important;
+      border: none !important;
+      font-weight: 600 !important;
+      font-size: 1rem !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      font-family: 'Poppins', sans-serif !important;
+      text-decoration: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 999 !important;
+      position: relative !important;
     }
 
     .btn.primary {
-      background: var(--gradient-primary);
-      color: #ffffff;
-      box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
+      background: linear-gradient(135deg, #FF8C42, #FF6B35) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3) !important;
     }
 
     .btn.primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.4);
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 30px rgba(255, 140, 66, 0.4) !important;
     }
 
     .btn.secondary {
-      background: transparent;
-      border: 2px solid var(--orange-1);
-      color: var(--orange-1);
+      background: transparent !important;
+      border: 2px solid #FF8C42 !important;
+      color: #FF8C42 !important;
     }
 
     .btn.secondary:hover {
-      background: var(--orange-1);
-      color: #ffffff;
-      transform: translateY(-3px);
+      background: #FF8C42 !important;
+      color: #ffffff !important;
+      transform: translateY(-3px) !important;
     }
 
     .hero-socials {
@@ -456,14 +462,13 @@
       
       .hero-actions {
         justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
       }
       
       .hero-actions .btn {
-        width: 100%;
-        max-width: 280px;
+        min-width: 180px;
         justify-content: center;
       }
       
@@ -544,9 +549,9 @@
       }
       
       .hero-actions .btn {
-        max-width: 240px;
+        min-width: 160px;
         font-size: 0.9rem;
-        padding: 12px 20px;
+        padding: 12px 20px !important;
       }
       
       .hero-socials a {
@@ -583,12 +588,12 @@
       }
 
       .about-grid {
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px !important;
       }
 
       .stats-grid {
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px !important;
       }
     }
@@ -633,10 +638,17 @@
         min-width: 24px;
       }
       
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
       .hero-actions .btn {
-        max-width: 200px;
-        font-size: 0.8rem;
-        padding: 10px 16px;
+        min-width: 200px;
+        width: 100%;
+        max-width: 260px;
+        font-size: 0.85rem;
+        padding: 12px 20px !important;
       }
       
       .hero-socials a {
@@ -728,9 +740,9 @@
       }
       
       .hero-actions .btn {
-        padding: 8px 16px;
+        padding: 8px 16px !important;
         font-size: 0.8rem;
-        max-width: 180px;
+        min-width: 140px;
       }
       
       .hero-socials a {
@@ -782,15 +794,15 @@
           <span class="hero-greeting">Hello, I'm</span>
           <h1 class="hero-name">Md. Azmeer Hossin Talukder</h1>
           <div class="hero-typed"><span id="typed-text"></span></div>
-          <p class="hero-bio">Lecturer (ICT) · Civil Aviation School and College · Tejgaon, Dhaka</p>
+          <p class="hero-bio">Lecturer (ICT) · Civil Aviation School and College · Tejgaon <br> Dhaka, Bangladesh</p>
           <div class="hero-stats">
             <div><span class="count" data-target="12">0</span>+ Courses</div>
             <div><span class="count" data-target="8">0</span>+ Projects</div>
             <div><span class="count" data-target="5">0</span>+ Awards</div>
           </div>
           <div class="hero-actions">
-            <a href="resume.html" class="btn primary">Download CV <i class="fas fa-download"></i></a>
-            <a href="contact.html" class="btn secondary">Hire Me <i class="fas fa-paper-plane"></i></a>
+            <a href="resume.html" class="btn primary"><i class="fas fa-download"></i> Download CV</a>
+            <a href="contact.html" class="btn secondary"><i class="fas fa-paper-plane"></i> Hire Me</a>
           </div>
           <div class="hero-socials">
             <a href="https://www.facebook.com/hossin3" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -810,7 +822,7 @@
     </section>
 
     <!-- Image Slider Section -->
-     <section class="section" style="padding:60px 0; background: var(--gradient-light);">
+    <section class="section" style="padding:60px 0; background: var(--gradient-light);">
       <div class="container">
         <h2 class="section-title">Featured <span>Gallery</span></h2>
         <div class="image-slider">
@@ -863,34 +875,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Statistics Section     <section class="section" style="padding:60px 0;">
-      <div class="container">
-        <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
-          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
-            <i class="fas fa-graduation-cap" style="font-size:2.5rem;color:#FF6B6B;margin-bottom:12px;display:block;"></i>
-            <h3 style="font-size:2rem;color:#FF6B6B;">12+</h3>
-            <p style="opacity:0.7;">Courses Taught</p>
-          </div>
-          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
-            <i class="fas fa-users" style="font-size:2.5rem;color:#4ECDC4;margin-bottom:12px;display:block;"></i>
-            <h3 style="font-size:2rem;color:#4ECDC4;">500+</h3>
-            <p style="opacity:0.7;">Students</p>
-          </div>
-          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
-            <i class="fas fa-award" style="font-size:2.5rem;color:#FFD93D;margin-bottom:12px;display:block;"></i>
-            <h3 style="font-size:2rem;color:#FFD93D;">8</h3>
-            <p style="opacity:0.7;">Awards</p>
-          </div>
-          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
-            <i class="fas fa-globe" style="font-size:2.5rem;color:#6C5CE7;margin-bottom:12px;display:block;"></i>
-            <h3 style="font-size:2rem;color:#6C5CE7;">15+</h3>
-            <p style="opacity:0.7;">Countries Visited</p>
-          </div>
-        </div>
-      </div>
-    </section>-->
-
 
     <!-- About Preview -->
     <section class="section" style="background: var(--gradient-light);">
@@ -1107,10 +1091,8 @@
         counterObserver.observe(counter);
       });
       
-      
-      
       // =========================================
-      // 4. BLOG SECTION
+      // 3. BLOG SECTION
       // =========================================
       const blogGrid = document.getElementById('blogGrid');
       
