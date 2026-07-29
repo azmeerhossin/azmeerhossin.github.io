@@ -21,7 +21,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.30/dist/lenis.min.js" defer></script>
   
   <style>
-    /* ===== SLIDER FIX - COVER (No empty space) ===== */
+    /* ===== SLIDER FIX ===== */
     .image-slider {
       position: relative;
       overflow: hidden;
@@ -82,13 +82,8 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
-    .slider-btn.prev {
-      left: 20px;
-    }
-
-    .slider-btn.next {
-      right: 20px;
-    }
+    .slider-btn.prev { left: 20px; }
+    .slider-btn.next { right: 20px; }
 
     .slider-dots {
       display: flex;
@@ -111,11 +106,9 @@
       transform: scale(1.2);
     }
 
-    .slider-dots .dot:hover {
-      background: #ffffff;
-    }
+    .slider-dots .dot:hover { background: #ffffff; }
 
-    /* ===== HERO SECTION ===== */
+    /* ===== HERO SECTION - MOBILE FIX ===== */
     .hero-section {
       min-height: 100vh;
       display: flex;
@@ -133,6 +126,12 @@
       align-items: center;
       position: relative;
       z-index: 2;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .hero-greeting {
@@ -289,7 +288,7 @@
       border-radius: 50%;
     }
 
-    /* ===== FLOATING SHAPES - DEEP ORANGE ===== */
+    /* ===== FLOATING SHAPES ===== */
     .float-shape {
       position: absolute;
       border-radius: 50%;
@@ -298,7 +297,6 @@
       pointer-events: none;
     }
 
-    /* Shape 1 - Top Right */
     .shape1 {
       width: 380px;
       height: 380px;
@@ -308,7 +306,6 @@
       animation: floatShape1 20s ease-in-out infinite;
     }
 
-    /* Shape 2 - Bottom Right */
     .shape2 {
       width: 280px;
       height: 280px;
@@ -340,9 +337,7 @@
       text-align: center;
     }
 
-    .section-title span {
-      color: var(--orange-1);
-    }
+    .section-title span { color: var(--orange-1); }
 
     /* ===== BLOG CARDS ===== */
     .blog-grid {
@@ -374,9 +369,7 @@
       color: #1a1a2e;
     }
 
-    .blog-card h4:hover {
-      color: #FF8C42;
-    }
+    .blog-card h4:hover { color: #FF8C42; }
 
     .blog-card .blog-meta {
       display: flex;
@@ -389,16 +382,8 @@
       border-top: 1px solid #f3f4f6;
     }
 
-    .blog-card .blog-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .blog-card .blog-meta i {
-      color: #FF8C42;
-      font-size: 0.9rem;
-    }
+    .blog-card .blog-meta span { display: flex; align-items: center; gap: 4px; }
+    .blog-card .blog-meta i { color: #FF8C42; font-size: 0.9rem; }
 
     .blog-card .blog-meta .like-btn {
       background: none;
@@ -414,17 +399,9 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .blog-card .blog-meta .like-btn:hover {
-      color: #FF4D4D;
-    }
-
-    .blog-card .blog-meta .like-btn.liked {
-      color: #FF4D4D;
-    }
-
-    .blog-card .blog-meta .like-btn.liked i {
-      color: #FF4D4D;
-    }
+    .blog-card .blog-meta .like-btn:hover { color: #FF4D4D; }
+    .blog-card .blog-meta .like-btn.liked { color: #FF4D4D; }
+    .blog-card .blog-meta .like-btn.liked i { color: #FF4D4D; }
 
     .blog-card .blog-meta .share-btn {
       background: none;
@@ -440,41 +417,73 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .blog-card .blog-meta .share-btn:hover {
-      color: #1877F2;
-    }
+    .blog-card .blog-meta .share-btn:hover { color: #1877F2; }
 
-    /* ===== RESPONSIVE ===== */
+    /* ============================================
+       MOBILE RESPONSIVE FIX
+       ============================================ */
+    
+    /* Mobile & Tablet */
     @media (max-width: 992px) {
       .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 40px;
+        padding: 0 20px;
       }
       
       .hero-image {
         order: 0;
+        margin: 0 auto;
       }
       
       .hero-content {
         order: 1;
+        align-items: center;
+        text-align: center;
       }
       
       .profile-frame {
-        width: 240px;
-        height: 240px;
+        width: 220px;
+        height: 220px;
       }
       
       .hero-stats {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
       }
       
       .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      
+      .hero-actions .btn {
+        width: 100%;
+        max-width: 280px;
         justify-content: center;
       }
       
       .hero-socials {
         justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .hero-name {
+        font-size: 2.5rem;
+      }
+      
+      .hero-typed {
+        font-size: 1.1rem;
+        min-height: 2.5rem;
+      }
+      
+      .hero-bio {
+        font-size: 1rem;
+        padding: 0 10px;
       }
 
       .blog-grid {
@@ -482,22 +491,70 @@
         gap: 20px;
       }
 
-      .shape1 {
-        width: 250px;
-        height: 250px;
-        top: -50px;
-        right: -50px;
-      }
-
-      .shape2 {
-        width: 200px;
-        height: 200px;
-        bottom: -40px;
-        right: -40px;
+      .shape1, .shape2 {
+        display: none;
       }
     }
 
     @media (max-width: 768px) {
+      .hero-section {
+        padding: 100px 0 50px;
+        min-height: auto;
+      }
+      
+      .hero-container {
+        gap: 30px;
+        padding: 0 16px;
+      }
+      
+      .profile-frame {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .hero-name {
+        font-size: 2rem;
+      }
+      
+      .hero-greeting {
+        font-size: 1rem;
+      }
+      
+      .hero-typed {
+        font-size: 1rem;
+        min-height: 2rem;
+      }
+      
+      .hero-bio {
+        font-size: 0.95rem;
+        padding: 0 5px;
+      }
+      
+      .hero-stats {
+        gap: 14px;
+      }
+      
+      .hero-stats div {
+        font-size: 0.85rem;
+      }
+      
+      .hero-stats .count {
+        font-size: 1.5rem;
+        min-width: 30px;
+      }
+      
+      .hero-actions .btn {
+        max-width: 240px;
+        font-size: 0.9rem;
+        padding: 12px 20px;
+      }
+      
+      .hero-socials a {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+      }
+      
       .slide {
         height: 350px;
       }
@@ -508,40 +565,86 @@
         font-size: 1rem;
       }
       
-      .slider-btn.prev {
-        left: 10px;
-      }
+      .slider-btn.prev { left: 10px; }
+      .slider-btn.next { right: 10px; }
       
-      .slider-btn.next {
-        right: 10px;
-      }
-      
-      .profile-frame {
-        width: 200px;
-        height: 200px;
-      }
-
       .blog-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
-
-      .shape1 {
-        width: 180px;
-        height: 180px;
-        top: -30px;
-        right: -30px;
+      
+      .section {
+        padding: 50px 0;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 32px;
       }
 
-      .shape2 {
-        width: 150px;
-        height: 150px;
-        bottom: -30px;
-        right: -30px;
+      .about-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
       }
     }
 
     @media (max-width: 480px) {
+      .hero-section {
+        padding: 80px 0 40px;
+      }
+      
+      .profile-frame {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .hero-name {
+        font-size: 1.6rem;
+      }
+      
+      .hero-greeting {
+        font-size: 0.9rem;
+      }
+      
+      .hero-typed {
+        font-size: 0.85rem;
+        min-height: 1.8rem;
+      }
+      
+      .hero-bio {
+        font-size: 0.85rem;
+      }
+      
+      .hero-stats {
+        gap: 10px;
+      }
+      
+      .hero-stats div {
+        font-size: 0.75rem;
+      }
+      
+      .hero-stats .count {
+        font-size: 1.2rem;
+        min-width: 24px;
+      }
+      
+      .hero-actions .btn {
+        max-width: 200px;
+        font-size: 0.8rem;
+        padding: 10px 16px;
+      }
+      
+      .hero-socials a {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+      }
+      
       .slide {
         height: 260px;
       }
@@ -552,21 +655,92 @@
         font-size: 0.8rem;
       }
       
+      .about-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+      }
+      
+      .about-card {
+        padding: 16px 12px !important;
+      }
+      
+      .about-card i {
+        font-size: 1.6rem !important;
+      }
+      
+      .about-card h4 {
+        font-size: 0.9rem !important;
+      }
+      
+      .about-card p {
+        font-size: 0.8rem !important;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+      }
+      
+      .stat-card {
+        padding: 20px 12px !important;
+      }
+      
+      .stat-card h3 {
+        font-size: 1.5rem !important;
+      }
+      
+      .stat-card i {
+        font-size: 2rem !important;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Landscape Mode Fix */
+    @media (max-height: 600px) and (orientation: landscape) {
+      .hero-section {
+        padding: 80px 0 30px;
+        min-height: auto;
+      }
+      
       .profile-frame {
-        width: 160px;
-        height: 160px;
+        width: 120px;
+        height: 120px;
       }
       
       .hero-name {
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
-
-      .shape1 {
-        display: none;
+      
+      .hero-typed {
+        font-size: 0.9rem;
+        min-height: 1.5rem;
       }
-
-      .shape2 {
-        display: none;
+      
+      .hero-stats {
+        gap: 12px;
+      }
+      
+      .hero-stats div {
+        font-size: 0.75rem;
+      }
+      
+      .hero-actions .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        max-width: 180px;
+      }
+      
+      .hero-socials a {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+      }
+      
+      .slide {
+        height: 200px;
       }
     }
   </style>
@@ -581,14 +755,14 @@
     <div class="container nav-container">
       <a href="index.html" class="logo">Azmeer<span>.</span></a>
       <nav class="nav-links" id="navLinks">
-       <a href="index.html" class="active">Home</a>
+        <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
         <a href="blog.html">Blog</a>
         <a href="vlog.html">Vlog</a>
         <a href="gallery.html">Gallery</a>
         <a href="courses.html">Courses</a>
-        <a href="aitools.html">AI Tools</a>
+        <a href="ai-tools.html">AI Tools</a>
         <a href="contact.html">Contact</a>
       </nav>
       <div class="nav-actions">
@@ -615,7 +789,7 @@
             <div><span class="count" data-target="5">0</span>+ Awards</div>
           </div>
           <div class="hero-actions">
-            <a href="#" class="btn primary">Download CV <i class="fas fa-download"></i></a>
+            <a href="resume.html" class="btn primary">Download CV <i class="fas fa-download"></i></a>
             <a href="contact.html" class="btn secondary">Hire Me <i class="fas fa-paper-plane"></i></a>
           </div>
           <div class="hero-socials">
@@ -631,13 +805,12 @@
           </div>
         </div>
       </div>
-      <!-- Floating Shapes -->
       <div class="float-shape shape1"></div>
       <div class="float-shape shape2"></div>
     </section>
 
     <!-- Image Slider Section -->
-    <section class="section" style="padding:60px 0; background: var(--gradient-light);">
+     <section class="section" style="padding:60px 0; background: var(--gradient-light);">
       <div class="container">
         <h2 class="section-title">Featured <span>Gallery</span></h2>
         <div class="image-slider">
@@ -659,13 +832,13 @@
                 <img src="assets/images/5.jpg" alt="Featured Image 5" />
               </div>
                <div class="slide">
-                <img src="assets/images/109.jpg" alt="Featured Image 5" />
+                <img src="assets/images/109.JPG" alt="Featured Image 5" />
               </div>
                <div class="slide">
-                <img src="assets/images/107.jpg" alt="Featured Image 5" />
+                <img src="assets/images/107.JPG" alt="Featured Image 5" />
               </div>
                <div class="slide">
-                <img src="assets/images/87.jpg" alt="Featured Image 5" />
+                <img src="assets/images/87.JPG" alt="Featured Image 5" />
               </div>
                <div class="slide">
                 <img src="assets/images/78.jpeg" alt="Featured Image 5" />
@@ -690,6 +863,34 @@
         </div>
       </div>
     </section>
+
+    <!-- Statistics Section     <section class="section" style="padding:60px 0;">
+      <div class="container">
+        <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-graduation-cap" style="font-size:2.5rem;color:#FF6B6B;margin-bottom:12px;display:block;"></i>
+            <h3 style="font-size:2rem;color:#FF6B6B;">12+</h3>
+            <p style="opacity:0.7;">Courses Taught</p>
+          </div>
+          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-users" style="font-size:2.5rem;color:#4ECDC4;margin-bottom:12px;display:block;"></i>
+            <h3 style="font-size:2rem;color:#4ECDC4;">500+</h3>
+            <p style="opacity:0.7;">Students</p>
+          </div>
+          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-award" style="font-size:2.5rem;color:#FFD93D;margin-bottom:12px;display:block;"></i>
+            <h3 style="font-size:2rem;color:#FFD93D;">8</h3>
+            <p style="opacity:0.7;">Awards</p>
+          </div>
+          <div class="stat-card" style="background:#ffffff;padding:32px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.06);">
+            <i class="fas fa-globe" style="font-size:2.5rem;color:#6C5CE7;margin-bottom:12px;display:block;"></i>
+            <h3 style="font-size:2rem;color:#6C5CE7;">15+</h3>
+            <p style="opacity:0.7;">Countries Visited</p>
+          </div>
+        </div>
+      </div>
+    </section>-->
+
 
     <!-- About Preview -->
     <section class="section" style="background: var(--gradient-light);">
@@ -905,7 +1106,8 @@
       counters.forEach(function(counter) {
         counterObserver.observe(counter);
       });
-  
+      
+      
       
       // =========================================
       // 4. BLOG SECTION
@@ -928,7 +1130,7 @@
         {
           id: 2,
           title: 'Digital transformation in classrooms',
-          excerpt: 'How schools are adopting digital tools to enhance learning experiences. From interactive whiteboards to AI-powered learning platforms...',
+          excerpt: 'How schools are adopting digital tools to enhance learning experiences...',
           date: 'March 10, 2025',
           readTime: '4 min read',
           likes: 15,
@@ -940,7 +1142,7 @@
         {
           id: 3,
           title: 'Teaching tips for online learning',
-          excerpt: 'Best practices for engaging students in virtual classrooms. Discover proven strategies to keep students motivated...',
+          excerpt: 'Best practices for engaging students in virtual classrooms...',
           date: 'March 5, 2025',
           readTime: '6 min read',
           likes: 18,
@@ -1038,5 +1240,6 @@
       
     });
   </script>
+
 </body>
 </html>
