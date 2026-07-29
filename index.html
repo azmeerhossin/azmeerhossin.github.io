@@ -108,7 +108,7 @@
 
     .slider-dots .dot:hover { background: #ffffff; }
 
-    /* ===== HERO SECTION ===== */
+    /* ===== HERO SECTION - FIXED OVERFLOW ===== */
     .hero-section {
       min-height: 100vh;
       display: flex;
@@ -117,6 +117,8 @@
       position: relative;
       overflow: hidden;
       background: var(--gradient-light);
+      width: 100%;
+      max-width: 100%;
     }
 
     .hero-container {
@@ -126,12 +128,16 @@
       align-items: center;
       position: relative;
       z-index: 2;
+      width: 100%;
+      max-width: 100%;
     }
 
     .hero-content {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
+      max-width: 100%;
     }
 
     .hero-greeting {
@@ -151,6 +157,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-family: var(--font-secondary);
+      word-break: break-word;
     }
 
     .hero-typed {
@@ -176,12 +183,14 @@
       font-weight: 300;
       opacity: 0.8;
       font-size: 1.05rem;
+      word-break: break-word;
     }
 
     .hero-stats {
       display: flex;
       gap: 32px;
       margin: 20px 0 28px;
+      flex-wrap: wrap;
     }
 
     .hero-stats div {
@@ -252,6 +261,7 @@
       display: flex;
       gap: 16px;
       margin-top: 28px;
+      flex-wrap: wrap;
     }
 
     .hero-socials a {
@@ -267,6 +277,7 @@
       font-size: 1.1rem;
       color: #1a1a2e;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
     }
 
     .hero-socials a:hover {
@@ -285,6 +296,7 @@
       border: 4px solid #ffffff;
       background: #ffffff;
       margin: 0 auto;
+      max-width: 100%;
     }
 
     .profile-frame img {
@@ -333,6 +345,9 @@
 
     .section {
       padding: 80px 0;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .section-title {
@@ -341,6 +356,7 @@
       margin-bottom: 48px;
       font-family: var(--font-secondary);
       text-align: center;
+      word-break: break-word;
     }
 
     .section-title span { color: var(--orange-1); }
@@ -350,6 +366,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      width: 100%;
     }
 
     .blog-card {
@@ -360,6 +377,9 @@
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       cursor: pointer;
       border: 1px solid transparent;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .blog-card:hover {
@@ -373,6 +393,7 @@
       font-family: 'Sora', sans-serif;
       margin-bottom: 8px;
       color: #1a1a2e;
+      word-break: break-word;
     }
 
     .blog-card h4:hover { color: #FF8C42; }
@@ -426,7 +447,7 @@
     .blog-card .blog-meta .share-btn:hover { color: #1877F2; }
 
     /* ============================================
-       MOBILE RESPONSIVE FIX
+       MOBILE RESPONSIVE FIX - HOME PAGE ONLY
        ============================================ */
     
     /* Mobile & Tablet */
@@ -505,11 +526,13 @@
       .hero-section {
         padding: 100px 0 50px;
         min-height: auto;
+        overflow-x: hidden;
       }
       
       .hero-container {
         gap: 30px;
         padding: 0 16px;
+        overflow-x: hidden;
       }
       
       .profile-frame {
@@ -537,6 +560,7 @@
       
       .hero-stats {
         gap: 14px;
+        justify-content: center;
       }
       
       .hero-stats div {
@@ -548,10 +572,22 @@
         min-width: 30px;
       }
       
+      .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+      
       .hero-actions .btn {
         min-width: 160px;
         font-size: 0.9rem;
         padding: 12px 20px !important;
+      }
+      
+      .hero-socials {
+        justify-content: center;
+        flex-wrap: wrap;
       }
       
       .hero-socials a {
@@ -580,6 +616,7 @@
       
       .section {
         padding: 50px 0;
+        overflow-x: hidden;
       }
       
       .section-title {
@@ -596,11 +633,22 @@
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px !important;
       }
+      
+      .container {
+        padding: 0 16px;
+        overflow-x: hidden;
+      }
     }
 
     @media (max-width: 480px) {
       .hero-section {
         padding: 80px 0 40px;
+        overflow-x: hidden;
+      }
+      
+      .hero-container {
+        padding: 0 12px;
+        overflow-x: hidden;
       }
       
       .profile-frame {
@@ -610,6 +658,7 @@
       
       .hero-name {
         font-size: 1.6rem;
+        word-break: break-word;
       }
       
       .hero-greeting {
@@ -627,6 +676,8 @@
       
       .hero-stats {
         gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       
       .hero-stats div {
@@ -641,6 +692,7 @@
       .hero-actions {
         flex-direction: column;
         align-items: center;
+        width: 100%;
       }
       
       .hero-actions .btn {
@@ -649,6 +701,11 @@
         max-width: 260px;
         font-size: 0.85rem;
         padding: 12px 20px !important;
+      }
+      
+      .hero-socials {
+        justify-content: center;
+        flex-wrap: wrap;
       }
       
       .hero-socials a {
@@ -708,6 +765,11 @@
       .section-title {
         font-size: 1.5rem;
       }
+      
+      .container {
+        padding: 0 12px;
+        overflow-x: hidden;
+      }
     }
 
     /* Landscape Mode Fix */
@@ -715,6 +777,7 @@
       .hero-section {
         padding: 80px 0 30px;
         min-height: auto;
+        overflow-x: hidden;
       }
       
       .profile-frame {
@@ -753,6 +816,59 @@
       
       .slide {
         height: 200px;
+      }
+      
+      .container {
+        padding: 0 12px;
+        overflow-x: hidden;
+      }
+    }
+
+    /* ===== FIX FOR EXTRA SMALL SCREENS ===== */
+    @media (max-width: 360px) {
+      .hero-name {
+        font-size: 1.3rem;
+      }
+      
+      .hero-actions .btn {
+        min-width: 160px;
+        font-size: 0.75rem;
+        padding: 10px 16px !important;
+      }
+      
+      .profile-frame {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .hero-stats div {
+        font-size: 0.7rem;
+      }
+      
+      .hero-stats .count {
+        font-size: 1rem;
+        min-width: 20px;
+      }
+      
+      .about-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+      
+      .about-card {
+        padding: 12px 8px !important;
+      }
+      
+      .about-card i {
+        font-size: 1.2rem !important;
+      }
+      
+      .about-card h4 {
+        font-size: 0.8rem !important;
+      }
+      
+      .about-card p {
+        font-size: 0.7rem !important;
       }
     }
   </style>
